@@ -1,0 +1,48 @@
+.layout{
+    &-header{
+        height: 70px;
+        background-image: linear-gradient(80deg, #00857a, #006a75);
+    }
+    &-title{
+        color: #ffffff;
+        height: 70px;
+        line-height: 70px;
+        width: 220px;
+        text-align: center;
+        font-size: 23px;
+    }
+    &-sidebar{
+        position: absolute;
+        top: 70px;
+        left: 0;
+        bottom: 0;
+        background-color: $colorWhite;
+        width: 220px;
+        box-sizing: border-box;
+    }
+    &-menus{
+        padding: 10px 15px;
+    }
+    &-menu{
+        &Link{
+            display: block;
+            text-decoration: none;
+            height: 50px;
+            line-height: 50px;
+            font-size: 16px;
+            color: rgba(72, 72, 72, 1);
+            border-bottom: 1px solid rgba(242, 242, 242, 1);
+            &:hover{
+                border-color: rgba(100, 100, 100, 1);
+                color: rgba(72, 72, 72, 1);
+            }
+            &--active{
+                color: $colorPrimary;
+                border-color: $colorPrimary;
+            }
+        }
+    }
+    &-main{
+        margin-left: 220px;
+    }
+}

@@ -1,0 +1,111 @@
+.cooModal{
+    position: relative;
+    top: 100px;
+    margin: 0px auto;
+    background-color: #fff;
+    padding: 20px;
+    box-sizing: border-box;
+    transform-origin: 50% 50%;
+
+    &-mask{
+        position: fixed;
+        top: 0px;
+        bottom: 0px;
+        left: 0px;
+        right: 0px;
+        z-index: 1000;
+        background-color: $maskBgColor;
+        animation: cooFadeIn .3s ease;
+        transition: opacity .3s ease;
+        &--hidden{
+            display: none;
+        }
+    }
+
+    &-wrap{
+        position: fixed;
+        top: 0px;
+        bottom: 0px;
+        left: 0px;
+        right: 0px;
+        z-index: 1000;
+        animation: cooScaleIn .3s ease;
+        transition: opacity .3s ease, transform .3s ease;
+        &--hidden{
+            display: none;
+        }
+    }
+
+    &-content{
+        font-size: 14px;
+    }
+
+    &-close{
+        position: absolute;
+        right: 16px;
+        top: 16px;
+        font-size: 20px;
+        color: #999;
+        transition: all .3s ease;
+        &:hover{
+            color: #000000;
+        }
+    }
+
+    &-title{
+        font-size: 16px;
+        font-weight: 700;
+        margin-bottom: 20px;
+    }
+
+    &-body{
+        padding-bottom: 20px;
+    }
+
+    &-footer{
+        border-top: 1px solid #e4e4e4;
+        padding-top: 20px;
+        text-align: right;
+        >.cooButton{
+            margin-left: 20px;
+        }
+    }
+}
+
+.cooModal-toast{
+    .cooModal{
+        &-body{
+            padding: 10px 10px 10px 50px;
+            >.cooIcon{
+                position: absolute;
+                left: 30px;
+                top: 28px;
+                font-size: 25px;
+                &-circle-good{
+                    color: $green;
+                }
+                &-info{
+                    color: $blue;
+                }
+                &-help{
+                    color: $orange;
+                }
+                &-circle-close{
+                    color: $red;
+                }
+            }
+        }
+    }
+    &-title{
+        font-size: 18px;
+        font-weight: 800;
+    }
+    &-content{
+        margin-top: 10px;
+        font-size: 14px;
+    }
+    &-footer{
+        text-align: right;
+        margin-top: 10px;
+    }
+}

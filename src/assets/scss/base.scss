@@ -1,0 +1,19 @@
+@import "base/normalize";
+@import "base/variables";
+@import "layout";
+
+body{
+    font-family: Circular, PingFang-SC, "Hiragino Sans GB", 微软雅黑, "Microsoft YaHei", "Heiti SC";
+    font-size: 14px;
+    background-color: $colorBg;
+}
+html, body, .app, .layout{
+    height: 100%;
+}
+ul, li{
+    list-style: none;
+}
+p, h1, h2, h3, ul, li{
+    margin: 0px;
+    padding: 0px;
+}
