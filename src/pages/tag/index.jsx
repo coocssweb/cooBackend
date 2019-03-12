@@ -8,7 +8,7 @@ class Index extends Component {
         this.handleCreateClick = this.handleCreateClick.bind(this);
         this.handleEditClick = this.handleEditClick.bind(this);
         this.state = {
-            visible: true,
+            visible: false,
             tags: [
                 {
                     id: 1,

@@ -15,3 +15,4 @@ export Placebo from './placebo';
 export Dropdown from './dropdown';
 export Input from './input';
 export Form from './form';
+export Uploader from './uploader';

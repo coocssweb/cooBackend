@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import propTypes from 'prop-types';
 import className from 'classnames';
-import { Input, Form } from '@components';
+import { Input, Form, Uploader } from '@components';
 const { FormLine, FormItem } = Form;
 
 
@@ -39,7 +39,7 @@ class Index extends Component {
 
                 <FormLine>
                     <FormItem label='封面'>
-                        <Input size="large" placeholder="请输入封面" />
+                        <Uploader max={2} images={['https://photo.tuchong.com/1732720/ft640/83757108.webp']} />
                     </FormItem>
                 </FormLine>
             </Form>

@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import className from 'classnames';
 import { Route, NavLink } from 'react-router-dom';
 import Tag from '@containers/tag';
+import Article from '@containers/article';
 
 class index extends Component {
     constructor(props) {
@@ -27,13 +28,7 @@ class index extends Component {
                             </NavLink>
                         </li>
                         <li className={className('layout-menu')}>
-                            <NavLink to="/articles" className={className('layout-menuLink')}>
-                                <i className={className('layout-menuIcon')}></i>
-                                <span className={className('layout-menuName')}>图像管理</span>
-                            </NavLink>
-                        </li>
-                        <li className={className('layout-menu')}>
-                            <NavLink to="/shares" className={className('layout-menuLink')}>
+                            <NavLink to="/articles" className={className('layout-menuLink')} activeClassName={className('layout-menuLink--active')}>
                                 <i className={className('layout-menuIcon')}></i>
                                 <span className={className('layout-menuName')}>我的分享</span>
                             </NavLink>
@@ -42,6 +37,7 @@ class index extends Component {
                 </aside>
                 <div className={className('layout-main')}>
                     <Route path="/tags" component={Tag} exact />
+                    <Route path="/articles" component={Article} exact />
                 </div>
             </div>
         );
