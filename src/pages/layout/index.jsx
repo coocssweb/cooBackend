@@ -1,5 +1,7 @@
 import React, {Component} from 'react';
 import className from 'classnames';
+import { Route, NavLink } from 'react-router-dom';
+import Tag from '@containers/tag';
 
 class index extends Component {
     constructor(props) {
@@ -11,7 +13,7 @@ class index extends Component {
         return (
             <div className={className('layout')}>
                 <header className={className('layout-header')}>
-                    <h2 className={className('layout-title')}>凤凰树下</h2>
+                    <h2 className={className('layout-title')}>一些分享</h2>
                     <div className={className('layout-user')}>
                         <a href="javascript:;"></a>
                     </div>
@@ -19,27 +21,27 @@ class index extends Component {
                 <aside className={className('layout-sidebar')}>
                     <ul className={className('layout-menus')}>
                         <li className={className('layout-menu')}>
-                            <a href="javascript:;" className={className('layout-menuLink')}>
+                            <NavLink to="/tags" className={className('layout-menuLink')} activeClassName={className('layout-menuLink--active')}>
                                 <i className={className('layout-menuIcon')}></i>
-                                <span className={className('layout-menuName')}>标签信息</span>
-                            </a>
+                                <span className={className('layout-menuName')}>特色标签</span>
+                            </NavLink>
                         </li>
                         <li className={className('layout-menu')}>
-                            <a href="javascript:;" className={className({'layout-menuLink--active': true, 'layout-menuLink': true})}>
+                            <NavLink to="/articles" className={className('layout-menuLink')}>
                                 <i className={className('layout-menuIcon')}></i>
-                                <span className={className('layout-menuName')}>图册管理</span>
-                            </a>
+                                <span className={className('layout-menuName')}>图像管理</span>
+                            </NavLink>
                         </li>
                         <li className={className('layout-menu')}>
-                            <a href="javascript:;" className={className('layout-menuLink')}>
+                            <NavLink to="/shares" className={className('layout-menuLink')}>
                                 <i className={className('layout-menuIcon')}></i>
-                                <span className={className('layout-menuName')}>文章信息</span>
-                            </a>
+                                <span className={className('layout-menuName')}>我的分享</span>
+                            </NavLink>
                         </li>
                     </ul>
                 </aside>
                 <div className={className('layout-main')}>
-
+                    <Route path="/tags" component={Tag} exact />
                 </div>
             </div>
         );

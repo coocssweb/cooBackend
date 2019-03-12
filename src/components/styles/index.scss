@@ -15,10 +15,9 @@
 @import "lazyimg";
 @import "placebo";
 @import "dropdown";
+@import "input";
+@import "form";
 
-body{
-    color: #3c4043;
-}
 .cooClearfix{
     &:after{
         content: '';

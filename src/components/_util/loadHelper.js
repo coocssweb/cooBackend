@@ -2,7 +2,9 @@
  * 图片加载函数
  * 返回一个promise
  */
-export const loadImage = (images, success = () => {}, error = () => {}) => {
+export const loadImage = (images, success = () => {
+}, error = () => {
+}) => {
     let haveLoadCount = 0;
     let successCount = 0;
     let errorCount = 0;
@@ -19,7 +21,7 @@ export const loadImage = (images, success = () => {}, error = () => {}) => {
                 successCount++;
                 success(index);
                 if (haveLoadCount === total) {
-                    resolve({success: successCount, error: errorCount});
+                    resolve({ success: successCount, error: errorCount });
                 }
             };
             image.onerror = function (e) {
@@ -27,7 +29,7 @@ export const loadImage = (images, success = () => {}, error = () => {}) => {
                 errorCount++;
                 error(index);
                 if (haveLoadCount === total) {
-                    resolve({success: successCount, error: errorCount});
+                    resolve({ success: successCount, error: errorCount });
                 }
             };
             image.src = src;

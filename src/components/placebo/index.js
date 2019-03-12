@@ -7,7 +7,7 @@ import Placebo from './Placebo';
 
 let _placebo;
 
-const newInstancePlacebo = ({fillColor}) => {
+const newInstancePlacebo = ({ fillColor }) => {
     const root = document.createElement('div');
     root.className = 'cooPlacebo-container';
     Placebo.domContainer = root;
@@ -24,12 +24,12 @@ const newInstancePlacebo = ({fillColor}) => {
 
     ReactDOM.render(
         (
-            <Placebo fillColor={fillColor} ref={ref} />
+            <Placebo fillColor={ fillColor } ref={ref} />
         ),
         root);
 };
 
-Placebo.open = (options = {fillColor: '66, 133, 244'}) => {
+Placebo.open = (options = { fillColor: '66, 133, 244' }) => {
     // 只会创建一次
     if (!_placebo) {
         newInstancePlacebo(options);

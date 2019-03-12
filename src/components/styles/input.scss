@@ -1,0 +1,83 @@
+.cooInput{
+    &-wrapper {
+        position: relative;
+        display: inline-block;
+    }
+    display: inline-block;
+    outline: 0;
+    position: relative;
+    background-image: none;
+    background-color: transparent;
+    font-smoothing: antialiased;
+    border: 1px solid $borderInputColor;
+    color: $colorGrayDark;
+    &:focus{
+        border-color: $borderInputFocusColor;
+    }
+
+    &--default{
+        padding: 6px 10px;
+        line-height: 22px;
+        border-width: 1px;
+        border-style: solid;
+        font-size: 14px;
+        border-radius: $borderRadius;
+        width: 250px;
+    }
+
+    &--large{
+        padding: 10px 10px;
+        font-size: 14px;
+        line-height: 24px;
+        width: 300px;
+        border-radius: $borderRadiusLarge;
+    }
+    &--readonly{
+        background-image: linear-gradient(0deg, #f8f8f8, #efefef);
+        border-color: $normalBorderColor;
+        background-color: $white;
+        color: #999;
+        cursor: not-allowed;
+        &:focus{
+            border-color: $normalBorderColor;
+        }
+    }
+}
+
+.cooTextArea{
+    display: inline-block;
+    outline: 0;
+    position: relative;
+    background-image: none;
+    background-color: transparent;
+    font-smoothing: antialiased;
+    border: 1px solid $borderInputColor;
+    color: $colorGrayDark;
+    resize: none;
+    &:focus{
+        border-color: $borderInputFocusColor;
+    }
+
+    &--default{
+        padding: 6px 10px;
+        line-height: 22px;
+        border-width: 1px;
+        border-style: solid;
+        font-size: 14px;
+        border-radius: $borderRadius;
+        width: 250px;
+    }
+
+    &--large{
+        padding: 10px 10px;
+        font-size: 14px;
+        line-height: 24px;
+        width: 300px;
+        border-radius: $borderRadiusLarge;
+    }
+
+    &-wrapper {
+        position: relative;
+        display: inline-block;
+    }
+}

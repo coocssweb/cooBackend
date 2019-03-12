@@ -7,9 +7,10 @@
         color: #ffffff;
         height: 70px;
         line-height: 70px;
-        width: 220px;
+        width: 219px;
         text-align: center;
-        font-size: 23px;
+        font-size: 16px;
+        border-right: 1px solid #007682;
     }
     &-sidebar{
         position: absolute;
@@ -17,8 +18,8 @@
         left: 0;
         bottom: 0;
         background-color: $colorWhite;
-        width: 220px;
-        box-sizing: border-box;
+        width: 219px;
+        border-right: 1px solid rgba(235, 235, 235, 1);
     }
     &-menus{
         padding: 10px 15px;
@@ -29,7 +30,6 @@
             text-decoration: none;
             height: 50px;
             line-height: 50px;
-            font-size: 16px;
             color: rgba(72, 72, 72, 1);
             border-bottom: 1px solid rgba(242, 242, 242, 1);
             &:hover{
@@ -44,5 +44,14 @@
     }
     &-main{
         margin-left: 220px;
+        padding: 10px;
     }
+}
+
+.page {
+
+}
+
+.toolbar{
+
 }

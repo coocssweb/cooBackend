@@ -9,7 +9,5 @@
     }],
     "@babel/preset-react"
   ],
-  "plugins": [
-
-  ]
+  "plugins": ["@babel/plugin-proposal-export-default-from"]
 }

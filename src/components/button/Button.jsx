@@ -54,7 +54,7 @@ Button.defaultProps = {
 
 Button.propTypes = {
     size: propTypes.oneOf(['small', 'large', 'default']),
-    type: propTypes.oneOf(['primary', 'success', 'normal', 'danger']),
+    type: propTypes.oneOf(['primary', 'success', 'normal', 'danger', 'white']),
     disabled: propTypes.bool,
     circle: propTypes.bool,
     fill: propTypes.bool,

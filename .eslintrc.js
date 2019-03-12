@@ -8,7 +8,6 @@ module.exports = {
     },
     env: {
         browser: true,
-        jquery: true
     },
     //    https://github.com/feross/standard/blob/master/RULES.md#javascript-standard-style
     extends: 'standard',
@@ -33,7 +32,7 @@ module.exports = {
             'exports': 'only-multiline',
             'functions': 'ignore',
         }],
-        'no-unused-vars': ['warn'],
+        'no-unused-vars': 0,
         'no-undef': 2,
         'arrow-parens': 0,
         // allow async-await
@@ -42,8 +41,9 @@ module.exports = {
         'no-debugger': process.env.NODE_ENV === 'production' ? 2 : 0,
         'no-callback-literal': 0,
         'no-new': 0,
-        "eol-last": 0,
+        "space-before-function-paren": 0,
+        "space-after-function-paren": 0,
         "react/jsx-uses-react": "error",
         "react/jsx-uses-vars": "error"
     }
-};
+}

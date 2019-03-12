@@ -13,3 +13,5 @@ export cooStore from './cooStore';
 export Lazyimg from './lazyimg';
 export Placebo from './placebo';
 export Dropdown from './dropdown';
+export Input from './input';
+export Form from './form';
