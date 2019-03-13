@@ -43,12 +43,18 @@ class Input extends Component {
             opts.value = props.value;
         }
 
+
+        let optsWrapper = {};
+
         if (props.width !== null) {
-            opts.width = `${props.width}px`;
+            optsWrapper.style = {
+                width: typeof props.width === 'number' ? `${props.width}px` : props.width
+            };
         }
 
+
         return (
-            <div className={inputWrapperClassName}>
+            <div className={inputWrapperClassName} {...optsWrapper}>
                 <input className={inputClassName}
                        { ...opts }
                        defaultValue={props.defaultValue} readOnly={props.readonly} />
@@ -79,7 +85,7 @@ Input.propTypes = {
     placeholder: propTypes.string,
     showClear: propTypes.bool,
     readonly: propTypes.bool,
-    width: propTypes.number
+    width: propTypes.oneOfType([propTypes.number, propTypes.string])
 };
 
 export default Input;

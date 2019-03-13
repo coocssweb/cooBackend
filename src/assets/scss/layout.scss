@@ -19,7 +19,7 @@
         bottom: 0;
         background-color: $colorWhite;
         width: 219px;
-        border-right: 1px solid rgba(235, 235, 235, 1);
+        border-right: 1px solid $sidebarBorderColor;
     }
     &-menus{
         padding: 10px 15px;
@@ -43,15 +43,15 @@
         }
     }
     &-main{
-        margin-left: 220px;
-        padding: 10px;
+        position: absolute;
+        top: 70px;
+        left: 220px;
+        right: 0px;
+        bottom: 0px;
     }
 }
 
 .page {
-
-}
-
-.toolbar{
-
+    height: 100%;
+    box-sizing: border-box;
 }

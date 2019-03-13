@@ -43,7 +43,7 @@ class Index extends Component {
     render() {
         const { state } = this;
         return (
-            <div className={className('page')}>
+            <div className={className('page tagPage')}>
                 <div className={className('tagList')}>
                     {
                         state.tags.map(item => {

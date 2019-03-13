@@ -2,13 +2,15 @@
 @import "base/variables";
 @import "layout";
 @import "tag";
+@import "article";
+@import "articleForm";
 
 body{
     font-family: Circular,-apple-system,BlinkMacSystemFont,Roboto,Helvetica Neue,sans-serif;
     font-size: 14px;
     background-color: $colorBg;
 }
-html, body, .app, .layout{
+html, body, #app, .layout{
     height: 100%;
 }
 ul, li{
@@ -21,4 +23,14 @@ p, h1, h2, h3, h4, ul, li{
 
 h1, h2, h3, h4 {
     font-weight: 400;
+}
+
+.clearfix{
+    &:after{
+        content: '';
+        display: block;
+        height: 0px;
+        line-height: 0px;
+        clear: both;
+    }
 }

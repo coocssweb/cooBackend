@@ -61,6 +61,7 @@
     "webpack-merge": "^4.1.5"
   },
   "dependencies": {
+    "braft-editor": "^2.2.9",
     "classnames": "^2.2.6",
     "immutable": "^4.0.0-rc.12",
     "prop-types": "^15.7.2",

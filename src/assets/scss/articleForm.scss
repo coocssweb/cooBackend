@@ -1,0 +1,27 @@
+.articleForm{
+    &-title{
+        position: relative;
+        padding: 0 20px;
+        height: 60px;
+        border-bottom: 1px solid $sidebarBorderColor;
+    }
+    &-input{
+        display: block;
+        width: 100%;
+        outline: none;
+        background-color: #ffffff;
+        border: none;
+        padding: 19px 0;
+        height: 22px;
+        line-height: 22px;
+        font-size: 16px;
+    }
+    &-photo{
+        padding: 10px;
+        border-top: 1px solid $sidebarBorderColor;
+        border-bottom: 1px solid $sidebarBorderColor;
+    }
+    &-toolbar{
+        padding: 10px;
+    }
+}
