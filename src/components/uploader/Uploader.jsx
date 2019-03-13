@@ -56,15 +56,23 @@ class Uploader extends Component {
         this.fileRef.click();
     }
 
+    onPhotoClick (item, index) {
+        const props = this.props;
+        if ('onClick' in props) {
+            props.onClick(item, index);
+        }
+    }
+
     render () {
         const props = this.props;
         return (
             <div className={className('cooUploader cooClearfix')}>
                 {
-                    props.images.map(item => {
+                    props.images.map((item, index) => {
                         return (
                             <Image key={item}
                                    imagePath={item}
+                                   onClick={this.onPhotoClick.bind(this, item, index)}
                                    readonly={props.readonly} />
                         );
                     })

@@ -9,7 +9,6 @@ class Index extends Component {
         super(props);
         this.handleCreateClick = this.handleCreateClick.bind(this);
         this.state = {
-            visible: false,
             articles: [
                 {
                     id: 10,
@@ -58,9 +57,6 @@ class Index extends Component {
                 <div className="articleRight">
                     <ArticleForm />
                 </div>
-                <Drawer placement={state.placement} visible={state.visible} size={380}>
-
-                </Drawer>
             </div>
         );
     }

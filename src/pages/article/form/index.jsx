@@ -1,20 +1,20 @@
 import React, {Component} from 'react';
 import propTypes from 'prop-types';
 import className from 'classnames';
-import { Button, Uploader } from '@components';
-import BraftEditor from 'braft-editor';
-import '../../../assets/scss/editor.scss';
-
+import { Button, Uploader, Editor, Drawer, Form, Input } from '@components';
+const { TextArea } = Input;
+const { FormLine, FormItem } = Form;
 class Index extends Component {
     constructor(props) {
         super(props);
         this.handleEditorChange = this.handleEditorChange.bind(this);
         this.handleSave = this.handleSave.bind(this);
         this.handleUpload = this.handleUpload.bind(this);
+        this.handleUploaderClick = this.handleUploaderClick.bind(this);
         let height = window.innerHeight - 400;
         this.state = {
-            height,
-            editorState: BraftEditor.createEditorState(null)
+            visible: false,
+            height
         };
     }
 
@@ -26,39 +26,47 @@ class Index extends Component {
 
     }
 
-    handleUpload () {
+    handleUpload (param) {
 
     }
 
+    handleUploaderClick (item, index) {
+        this.setState({
+            visible: true
+        });
+    }
+
     render () {
-        const { editorState, height } = this.state;
+        const state = this.state;
+        const { height, placement } = state;
         return (
             <div className={className('articleForm')}>
                 <div className={className('articleForm-title')}>
                     <input className={className('articleForm-input')} placeholder="请输入标题" type="text" />
                 </div>
                 <div className={className('articleForm-content')}>
-                    <BraftEditor
-                        value={editorState}
-                        controls={[
-                            'headings', 'text-color', 'bold', 'italic', 'underline', 'separator',
-                            'emoji', 'text-align', 'separator',
-                            'list-ul', 'list-ol', 'blockquote', 'code', 'separator',
-                            'link', 'separator', 'hr', 'separator',
-                            'media', 'separator',
-                            'clear'
-                        ]}
-                        contentStyle={{ height: `${height}px` }}
-                        media={{uploadFn: this.handleUpload}}
-                        onChange={this.handleEditorChange}
-                    />
+                    <Editor height={height} content="" onChange={this.handleEditorChange} />
                 </div>
                 <div className={className('articleForm-photo')}>
-                    <Uploader max={2} images={['https://photo.tuchong.com/1732720/ft640/83757108.webp']} />
+                    <Uploader onClick={this.handleUploaderClick} max={2} images={['https://photo.tuchong.com/1732720/ft640/83757108.webp']} />
                 </div>
                 <div className={className('articleForm-toolbar')}>
                     <Button onClick={this.handleSave}>保存数据</Button>
                 </div>
+                <Drawer placement={state.placement} visible={state.visible} size={380}>
+                    <Form title='编辑图片信息'>
+                        <FormLine>
+                            <FormItem label='图片:'>
+                                <Uploader readonly images={['https://photo.tuchong.com/1732720/ft640/83757108.webp']} />
+                            </FormItem>
+                        </FormLine>
+                        <FormLine>
+                            <FormItem label='描述:'>
+                                <TextArea size="large" placeholder="请输入描述信息" />
+                            </FormItem>
+                        </FormLine>
+                    </Form>
+                </Drawer>
             </div>
         );
     }
