@@ -61,7 +61,7 @@ class Index extends Component {
                             </FormItem>
                         </FormLine>
                         <FormLine>
-                            <FormItem label='描述:'>
+                            <FormItem label='描述'>
                                 <TextArea size="large" placeholder="请输入描述信息" />
                             </FormItem>
                         </FormLine>

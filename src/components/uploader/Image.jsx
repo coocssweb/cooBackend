@@ -14,7 +14,7 @@ class Image extends Component {
         return (
             <div className={className('cooUploader-item')}>
                 <div className={className('cooUploader-image')}
-                     onClick={props.onClick.bind(this)}
+                     onClick={props.onClick}
                      style={{backgroundImage: `url(${props.imagePath})`}} >
                 </div>
                 {
