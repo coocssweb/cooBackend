@@ -17,3 +17,5 @@ export Input from './input';
 export Form from './form';
 export Uploader from './uploader';
 export Editor from './editor';
+export NoneData from './noneData';
+export Loading from './loading';

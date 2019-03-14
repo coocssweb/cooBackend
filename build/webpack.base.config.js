@@ -80,8 +80,8 @@ module.exports = function (mode) {
             }),
             // 注入环境变量，在代码内可以引用
             new webpack.DefinePlugin({
-                'NODE_ENV': configMode.env,
-                'API': configMode.api,
+                'NODE_ENV': JSON.stringify(configMode.env),
+                'API': JSON.stringify(configMode.api)
             })
         ],
         optimization: {

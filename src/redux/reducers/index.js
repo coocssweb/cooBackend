@@ -1,6 +1,6 @@
 import { combineReducers } from 'redux-immutablejs';
-import demo from './demo';
+import tags from './tags';
 
 export default combineReducers({
-    demo
+    tags
 });

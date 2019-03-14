@@ -10,18 +10,21 @@ class Loading extends Component {
 
     render () {
         return (
-            <div className="">
+            <div className={className({ 'cooLoading': true, [`cooLoading--${this.props.size}`]: true })}>
+                <span className={className('cooLoading-item cooLoading-item--1')}></span>
+                <span className={className('cooLoading-item cooLoading-item--2')}></span>
+                <span className={className('cooLoading-item cooLoading-item--3')}></span>
             </div>
         );
     }
 }
 
 Loading.defaultProps = {
-
+    size: 'default'
 };
 
 Loading.propTypes = {
-    type: propTypes.oneOf([''])
+    size: propTypes.oneOf(['small', 'default', 'large']),
 };
 
 export default Loading;

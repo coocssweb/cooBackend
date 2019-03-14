@@ -1,7 +1,14 @@
 import 'whatwg-fetch';
 
 class Base {
-    request ({ path, data = {}, method = 'GET', requireLogin }) {
+    constructor (path) {
+        // 接口规范为restFul规范
+        // 因此，在构造函数，设置统一的请求地址
+        // 子类内可以继承，设置资源path
+        /* eslint-disable */
+        this.requestUrl = `${API}${path}`;
+    }
+    request ({ id = '', data = {}, method = 'GET', requireLogin }) {
         const headers = {
             'Accept': 'application/json',
             'Content-Type': 'application/json'
@@ -10,14 +17,18 @@ class Base {
         let settings = {
             method,
             headers,
-            body: JSON.stringify(data),
             mode: 'cors'
         };
 
-        let requestUrl = `${process.env.API}${path}`;
+        if (method !== 'GET') {
+            settings.body = JSON.stringify(data);
+        }
+
+        // 设置id附加信息
+        const idAddons = id ? `/${id}` : '';
 
         return new Promise((resolve, reject) => {
-            fetch(requestUrl, settings).then((response) => {
+            fetch(`${this.requestUrl}${idAddons}`, settings).then((response) => {
                 resolve(response.json());
             }).catch((error) => {
                 reject(error);

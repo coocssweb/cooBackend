@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import className from 'classnames';
-import { Button, Icon, Drawer } from '@components';
+import { Button, Icon, Drawer, NoneData, Loading } from '@components';
 import TagForm from './form';
 class Index extends Component {
     constructor(props) {
@@ -10,22 +10,13 @@ class Index extends Component {
         this.state = {
             visible: false,
             tags: [
-                {
-                    id: 1,
-                    name: '京都',
-                    path: 'jingdu',
-                    poster: 'https://drscdn.500px.org/photo/290268443/q%3D80_h%3D600/v2?webp=true&sig=e52047fd9cb58d1a2c58862d8ffbf67415e560b850c3080546200b3491177b0d',
-                    desc: '当季推荐',
-                },
-                {
-                    id: 2,
-                    name: '成都',
-                    path: 'chengdu',
-                    poster: 'https://drscdn.500px.org/photo/296353715/q%3D80_h%3D450/v2?webp=true&sig=d695b7ba87da8781ba9bb4c1245c99036d8111dc1f166a6cc14dc754b4665755',
-                    desc: '当季推荐',
-                },
+
             ]
         };
+    }
+
+    componentDidMount () {
+        this.props.fetch();
     }
 
     handleCreateClick () {
@@ -41,9 +32,12 @@ class Index extends Component {
     }
 
     render() {
-        const { state } = this;
-        return (
-            <div className={className('page tagPage')}>
+        const { state, props } = this;
+
+        const renderList = () => {
+            return state.tags.length === 0 ? (
+                <NoneData loading={props.loading} buttonName='去新建标签' onClick={this.handleCreateClick}>没有找到标签</NoneData>
+            ) : (
                 <div className={className('tagList')}>
                     {
                         state.tags.map(item => {
@@ -61,11 +55,27 @@ class Index extends Component {
                         })
                     }
                 </div>
+            );
+        };
+
+        const renderToolbar = () => {
+            return state.tags.length > 0 ? (
                 <div className={className('tagToolbar')}>
-                    <Button size="large" onClick={this.handleCreateClick}>加新标签<Icon type="add" /></Button>
+                    <Button size="large" onClick={this.handleCreateClick}>添加标签<Icon type="add" /></Button>
                 </div>
+            ) : null;
+        };
+
+        return (
+            <div className={className('page tagPage')}>
+                {
+                    renderList()
+                }
+                {
+                    renderToolbar()
+                }
                 <Drawer placement={state.placement} visible={state.visible} size={380}>
-                    <TagForm />
+                    <TagForm onSave={props.onSave} />
                 </Drawer>
             </div>
         );

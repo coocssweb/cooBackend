@@ -1,0 +1,10 @@
+.cooNoneData {
+    text-align: center;
+    padding-top: 30px;
+    &-description{
+        color: $colorGray;
+    }
+    &-toolbar{
+        margin-top: 20px;
+    }
+}
