@@ -9,3 +9,12 @@ export const fetch = () => {
         }
     };
 };
+
+export const create = (data) => {
+    return {
+        types: [tagsActionTypes.CREATE_TAG_REQUEST, tagsActionTypes.CREATE_TAG_SUCCESS, tagsActionTypes.CREATE_TAG_ERROR],
+        promise: () => {
+            return tagsApi.create(data);
+        }
+    };
+};

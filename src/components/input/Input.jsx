@@ -9,10 +9,10 @@ class Input extends Component {
         this.state = {};
     }
 
-    onChange () {
+    onChange (e) {
         const props = this.props;
         if ('onChange' in props) {
-            props.onChange();
+            props.onChange(e.target.value);
         }
     }
 
@@ -39,7 +39,7 @@ class Input extends Component {
             placeholder: props.placeholder
         };
 
-        if (props.value !== null) {
+        if (props.value !== '') {
             opts.value = props.value;
         }
 
@@ -57,7 +57,10 @@ class Input extends Component {
             <div className={inputWrapperClassName} {...optsWrapper}>
                 <input className={inputClassName}
                        { ...opts }
-                       defaultValue={props.defaultValue} readOnly={props.readonly} />
+                       defaultValue={props.defaultValue}
+                       readOnly={props.readonly}
+                       onChange={this.onChange.bind(this)}
+                       onFocus={this.onFocus.bind(this)} />
                 {
                     props.showClear ? (
                         <a href="javascript:;" className={className(`${prefixCls}-icon`)}>
@@ -74,8 +77,8 @@ Input.defaultProps = {
     size: 'default',
     readonly: false,
     showClear: false,
-    defaultValue: null,
-    value: null,
+    defaultValue: '',
+    value: '',
     width: null,
 };
 
@@ -85,7 +88,9 @@ Input.propTypes = {
     placeholder: propTypes.string,
     showClear: propTypes.bool,
     readonly: propTypes.bool,
-    width: propTypes.oneOfType([propTypes.number, propTypes.string])
+    width: propTypes.oneOfType([propTypes.number, propTypes.string]),
+    value: propTypes.string,
+    defaultValue: propTypes.string
 };
 
 export default Input;

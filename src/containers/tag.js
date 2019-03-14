@@ -15,6 +15,9 @@ function mapDispatchToProps (dispatch) {
         fetch: () => {
             return dispatch(tagsActions.fetch());
         },
+        create: (data) => {
+            return dispatch(tagsActions.create(data));
+        }
     };
 }
 

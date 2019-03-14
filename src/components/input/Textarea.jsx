@@ -9,10 +9,10 @@ class Textarea extends Component {
         this.state = {};
     }
 
-    onChange () {
+    onChange (e) {
         const props = this.props;
         if ('onChange' in props) {
-            props.onChange();
+            props.onChange(e.target.value);
         }
     }
 
@@ -42,7 +42,7 @@ class Textarea extends Component {
             rows: props.rows
 
         };
-        if (props.value !== null) {
+        if (props.value !== '') {
             opts.value = props.value;
         }
         if (props.width !== null) {
@@ -51,7 +51,10 @@ class Textarea extends Component {
 
         return (
             <div className={inputWrapperClassName}>
-                <textarea className={inputClassName} {...opts} />
+                <textarea className={inputClassName}
+                          {...opts}
+                          onChange={this.onChange.bind(this)}
+                          onFocus={this.onFocus.bind(this)} />
                 {
                     props.showClear ? (
                         <a href="javascript:;" className={className(`${prefixCls}-icon`)}>
@@ -68,8 +71,8 @@ Textarea.defaultProps = {
     size: 'default',
     readonly: false,
     showClear: false,
-    defaultValue: null,
-    value: null,
+    defaultValue: '',
+    value: '',
     rows: 3
 };
 
@@ -78,8 +81,9 @@ Textarea.propTypes = {
     disabled: propTypes.bool,
     placeholder: propTypes.string,
     showClear: propTypes.bool,
+    value: propTypes.string,
+    defaultValue: propTypes.string,
     readonly: propTypes.bool,
-    rows: propTypes.number
 };
 
 export default Textarea;

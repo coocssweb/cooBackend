@@ -3,6 +3,8 @@ import propTypes from 'prop-types';
 import className from 'classnames';
 import Image from './Image';
 import Icon from '../icon';
+import util from '../_util';
+const _util = util();
 
 class Uploader extends Component {
     constructor (props) {
@@ -15,41 +17,71 @@ class Uploader extends Component {
         };
     }
 
-    static getDerivedStateFromProps (nextProps) {
-        return {
-            images: nextProps.images
-        };
+    static getDerivedStateFromProps (props, state) {
+        const prevProps = state.prevProps || { images: [] };
+        if (!_util.isEqualArray(props.images, prevProps.images)) {
+            return {
+                images: props.images,
+                prevProps: props
+            };
+        }
+
+        return null;
     }
 
     shouldComponentUpdate (nextProps, nextState) {
         const images = this.state.images;
         const nextImages = nextState.images;
 
-        if (images.length !== nextImages.length) {
-            return true;
-        }
-
-
-        let shouldUpdate = false;
-        for (let index of images.keys()) {
-            if (images[index] !== nextImages[index]) {
-                shouldUpdate = true;
-                break;
-            }
-        }
-
-        return shouldUpdate;
+        return !_util.isEqualArray(images, nextImages);
     }
 
-    onChange () {
+    onChange (images) {
         const props = this.props;
         if ('onChange' in props) {
-            props.onChange(this.state.images);
+            props.onChange(images);
         }
     }
 
     onUpload () {
+        const props = this.props;
+        if (!props.serverUrl) {
+            return false;
+        }
 
+        const file = this.fileRef.files[0];
+        const formData = new FormData();
+        formData.append('files', file);
+
+        const progressFn = (event) => {
+            // 上传进度
+            console.log(event.loaded / event.total * 100);
+        };
+
+        const errorFn = (response) => {
+            console.log(response);
+        };
+
+        const successFn = (response) => {
+            const result = JSON.parse(response.currentTarget.responseText);
+            const images = [...this.state.images, result.response.filename];
+            this.setState({
+                images
+            });
+            this.onChange(images);
+        };
+
+        const xhr = new XMLHttpRequest;
+        xhr.upload.addEventListener('progress', progressFn, false);
+        xhr.addEventListener('load', successFn, false);
+        xhr.addEventListener('error', errorFn, false);
+        xhr.addEventListener('abort', errorFn, false);
+        xhr.open('POST', props.serverUrl, true);
+        xhr.contentType = 'multipart/form-data';
+        if (props.token) {
+            xhr.setRequestHeader('Authorization', props.token);
+        }
+        xhr.send(formData);
     }
 
     onClick () {
@@ -65,10 +97,11 @@ class Uploader extends Component {
 
     render () {
         const props = this.props;
+        const state = this.state;
         return (
             <div className={className('cooUploader cooClearfix')}>
                 {
-                    props.images.map((item, index) => {
+                    state.images.map((item, index) => {
                         return (
                             <Image key={item}
                                    imagePath={item}
@@ -97,13 +130,17 @@ class Uploader extends Component {
 Uploader.defaultProps = {
     max: 1,
     readonly: false,
-    images: []
+    images: [],
+    serverUrl: '',
+    token: ''
 };
 
 Uploader.propTypes = {
     size: propTypes.number,
     readonly: propTypes.bool,
-    images: propTypes.array
+    images: propTypes.array,
+    serverUrl: propTypes.string,
+    token: propTypes.string
 };
 
 export default Uploader;

@@ -123,7 +123,7 @@ class Select extends Component {
 
     onMenuClick ({value, label}) {
         const props = this.props;
-        if (value !== this.state.value) {
+        if (value !== this.state.value.value) {
             if ('onChange' in props) {
                 props.onChange({value, label});
             }

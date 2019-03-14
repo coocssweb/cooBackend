@@ -10,8 +10,8 @@ class Base {
     }
     request ({ id = '', data = {}, method = 'GET', requireLogin }) {
         const headers = {
-            'Accept': 'application/json',
-            'Content-Type': 'application/json'
+            'Content-Type': 'application/json',
+            'Authorization': `bearer ${localStorage.getItem('access_token')}`
         };
 
         let settings = {
