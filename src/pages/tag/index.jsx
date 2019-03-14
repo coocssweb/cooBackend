@@ -8,10 +8,15 @@ class Index extends Component {
         this.handleCreateClick = this.handleCreateClick.bind(this);
         this.handleEditClick = this.handleEditClick.bind(this);
         this.state = {
-            visible: true,
-            tags: [
+            visible: false,
+            list: [],
+            tag: {}
+        };
+    }
 
-            ]
+    static getDerivedStateFromProps (props, state) {
+        return {
+            list: props.list
         };
     }
 
@@ -21,13 +26,15 @@ class Index extends Component {
 
     handleCreateClick () {
         this.setState({
-            visible: true
+            visible: true,
+            tag: null
         });
     }
 
-    handleEditClick () {
+    handleEditClick (tag) {
         this.setState({
-            visible: true
+            visible: true,
+            tag
         });
     }
 
@@ -35,20 +42,20 @@ class Index extends Component {
         const { state, props } = this;
 
         const renderList = () => {
-            return state.tags.length === 0 ? (
+            return state.list.length === 0 ? (
                 <NoneData loading={props.loading} buttonName='去新建标签' onClick={this.handleCreateClick}>没有找到标签</NoneData>
             ) : (
                 <div className={className('tagList')}>
                     {
-                        state.tags.map(item => {
+                        state.list.map(item => {
                             return (
                                 <div key={item.id}
                                      className={className('tagItem')}
                                      style={{ backgroundImage: `url(${item.poster})` }}>
                                     <div className="tagItem-cell">
                                         <div className={className('tagItem-name')}>{ item.name }</div>
-                                        <p className={className('tagItem-desc')}>{ item.desc }</p>
-                                        <Button type="white" onClick={this.handleEditClick}>编辑</Button>
+                                        <p className={className('tagItem-desc')}>{ item.description }</p>
+                                        <Button type="white" onClick={this.handleEditClick.bind(this, item)}>编辑</Button>
                                     </div>
                                 </div>
                             );
@@ -59,7 +66,7 @@ class Index extends Component {
         };
 
         const renderToolbar = () => {
-            return state.tags.length > 0 ? (
+            return state.list.length > 0 ? (
                 <div className={className('tagToolbar')}>
                     <Button size="large" onClick={this.handleCreateClick}>添加标签<Icon type="add" /></Button>
                 </div>
@@ -75,7 +82,10 @@ class Index extends Component {
                     renderToolbar()
                 }
                 <Drawer placement={state.placement} visible={state.visible} size={380}>
-                    <TagForm onCreate={props.create} />
+                    <TagForm
+                        tag={state.tag}
+                        onCreate={props.create}
+                        onEdit={props.edit} />
                 </Drawer>
             </div>
         );

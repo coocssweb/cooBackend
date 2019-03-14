@@ -43,6 +43,7 @@ class Uploader extends Component {
         }
     }
 
+    // todo 思考，这一段如何封装到 utils中
     onUpload () {
         const props = this.props;
         if (!props.serverUrl) {
@@ -54,7 +55,6 @@ class Uploader extends Component {
         formData.append('files', file);
 
         const progressFn = (event) => {
-            // 上传进度
             console.log(event.loaded / event.total * 100);
         };
 
@@ -95,6 +95,14 @@ class Uploader extends Component {
         }
     }
 
+    onRemoveClick (index) {
+        const images = [...this.state.images];
+        images.splice(index, 1);
+        this.setState({
+            images
+        });
+    }
+
     render () {
         const props = this.props;
         const state = this.state;
@@ -105,6 +113,7 @@ class Uploader extends Component {
                         return (
                             <Image key={item}
                                    imagePath={item}
+                                   onRemoveClick={this.onRemoveClick.bind(this, index)}
                                    onClick={this.onPhotoClick.bind(this, item, index)}
                                    readonly={props.readonly} />
                         );
@@ -112,7 +121,7 @@ class Uploader extends Component {
                 }
 
                 {
-                    props.images.length < props.max ? (
+                    state.images.length < props.max ? (
                         <a href="javascript:;"
                            className={className('cooUploader-button')}
                            onClick={this.onClick}><Icon type="add" /></a>

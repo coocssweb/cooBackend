@@ -37,14 +37,16 @@ class Textarea extends Component {
 
         let opts = {
             placeholder: props.placeholder,
-            defaultValue: props.defaultValue,
             readOnly: props.readonly,
             rows: props.rows
 
         };
-        if (props.value !== '') {
+        if (props.value !== null) {
             opts.value = props.value;
+        } else {
+            opts.defaultValue = props.defaultValue;
         }
+
         if (props.width !== null) {
             opts.width = `${props.width}px`;
         }
@@ -71,8 +73,8 @@ Textarea.defaultProps = {
     size: 'default',
     readonly: false,
     showClear: false,
-    defaultValue: '',
-    value: '',
+    defaultValue: null,
+    value: null,
     rows: 3
 };
 

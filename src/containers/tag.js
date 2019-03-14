@@ -17,6 +17,9 @@ function mapDispatchToProps (dispatch) {
         },
         create: (data) => {
             return dispatch(tagsActions.create(data));
+        },
+        edit: (id, data) => {
+            return dispatch(tagsActions.edit(id, data));
         }
     };
 }

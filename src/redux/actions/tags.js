@@ -18,3 +18,12 @@ export const create = (data) => {
         }
     };
 };
+
+export const edit = (id, data) => {
+    return {
+        types: [tagsActionTypes.EDIT_TAG_REQUEST, tagsActionTypes.EDIT_TAG_SUCCESS, tagsActionTypes.EDIT_TAG_ERROR],
+        promise: () => {
+            return tagsApi.edit(id, data);
+        }
+    };
+};

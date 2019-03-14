@@ -20,6 +20,7 @@ class Image extends Component {
                 {
                     !props.readonly ? (
                         <a href="javascript:;"
+                           onClick={props.onRemoveClick}
                            className={className('cooUploader-remove')}><Icon type="circle-close" /></a>
                     ) : null
                 }

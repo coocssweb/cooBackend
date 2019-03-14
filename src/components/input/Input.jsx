@@ -39,8 +39,10 @@ class Input extends Component {
             placeholder: props.placeholder
         };
 
-        if (props.value !== '') {
+        if (props.value !== null) {
             opts.value = props.value;
+        } else {
+            opts.defaultValue = props.defaultValue;
         }
 
 
@@ -57,7 +59,6 @@ class Input extends Component {
             <div className={inputWrapperClassName} {...optsWrapper}>
                 <input className={inputClassName}
                        { ...opts }
-                       defaultValue={props.defaultValue}
                        readOnly={props.readonly}
                        onChange={this.onChange.bind(this)}
                        onFocus={this.onFocus.bind(this)} />
@@ -77,8 +78,8 @@ Input.defaultProps = {
     size: 'default',
     readonly: false,
     showClear: false,
-    defaultValue: '',
-    value: '',
+    defaultValue: null,
+    value: null,
     width: null,
 };
 

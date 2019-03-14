@@ -5,6 +5,15 @@ import { Input, Form, Uploader, Select } from '@components';
 const { FormLine, FormItem } = Form;
 const { Option } = Select;
 
+const initialData = {
+    id: 0,
+    name: '',
+    path: '',
+    images: [],
+    type: '',
+    description: ''
+};
+
 class Index extends Component {
     constructor(props) {
         super(props);
@@ -12,22 +21,32 @@ class Index extends Component {
         this.handleSelectChange = this.handleSelectChange.bind(this);
         this.handleUploaderChange = this.handleUploaderChange.bind(this);
         this.state = {
-            name: '',
-            path: '',
-            images: [],
-            type: '',
-            description: ''
+            ...initialData
         };
     }
 
+    static getDerivedStateFromProps (props, state) {
+        // todo，思考initialData 的更好写法
+        const tag = props.tag;
+        if (!tag || state.id !== tag.id) {
+            return {
+                ...(tag || initialData),
+                images: tag && tag.poster ? [tag.poster] : []
+            };
+        }
+        return null;
+    }
+
     handleSave () {
-        const state = this.state;
+        const { state, props} = this;
+
         const postData = {
             ...state,
             poster: state.images[0]
         };
         delete postData.images;
-        this.props.onCreate(postData);
+        !state.id ? props.onCreate(postData) : props.onEdit(state.id, postData);
+
     }
 
     handleSelectChange (value) {
@@ -54,13 +73,18 @@ class Index extends Component {
             <Form title="填写标签信息" onSave={this.handleSave}>
                 <FormLine>
                     <FormItem label='名称'>
-                        <Input size="large" value={state.name} onChange={this.handleInputChange.bind(this, 'name')} placeholder="请输入名称" />
+                        <Input size="large"
+                               value={state.name}
+                               onChange={this.handleInputChange.bind(this, 'name')}
+                               placeholder="请输入名称" />
                     </FormItem>
                 </FormLine>
-
                 <FormLine>
                     <FormItem label='路径'>
-                        <Input size="large" value={state.path} onChange={this.handleInputChange.bind(this, 'path')} placeholder="请输入路径" />
+                        <Input size="large"
+                               value={state.path}
+                               onChange={this.handleInputChange.bind(this, 'path')}
+                               placeholder="请输入路径" />
                     </FormItem>
                 </FormLine>
                 <FormLine>
@@ -74,7 +98,9 @@ class Index extends Component {
                 </FormLine>
                 <FormLine>
                     <FormItem label='描述'>
-                        <Input.TextArea size="large" value={state.description} onChange={this.handleInputChange.bind(this, 'description')} placeholder="请输入描述" />
+                        <Input.TextArea size="large" value={state.description}
+                                        onChange={this.handleInputChange.bind(this, 'description')}
+                                        placeholder="请输入描述" />
                     </FormItem>
                 </FormLine>
                 <FormLine>
