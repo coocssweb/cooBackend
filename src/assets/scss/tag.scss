@@ -4,12 +4,14 @@
     }
     &List{
         display: flex;
+        flex-wrap: wrap;
     }
     &Item{
         width: 200px;
         height: 200px;
         background-size: cover;
         margin-right: 10px;
+        margin-bottom: 10px;
         display: table;
         &-cell{
             display: table-cell;
@@ -27,6 +29,17 @@
         }
     }
     &Toolbar{
-        padding: 20px 0px;
+        padding: 10px 0px 20px 0px;
+    }
+
+    &Remove{
+        position: absolute !important;
+        bottom: 0px;
+        width: 100%;
+        text-align: center;
+        display: none !important;
+        &--show{
+            display: block !important;
+        }
     }
 }

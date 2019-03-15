@@ -21,17 +21,19 @@ class Index extends Component {
         this.handleSelectChange = this.handleSelectChange.bind(this);
         this.handleUploaderChange = this.handleUploaderChange.bind(this);
         this.state = {
-            ...initialData
+            ...initialData,
+            prevProps: {}
         };
     }
 
     static getDerivedStateFromProps (props, state) {
         // todo，思考initialData 的更好写法
         const tag = props.tag;
-        if (!tag || state.id !== tag.id) {
+        if (state.prevProps.id !== tag.id) {
             return {
-                ...(tag || initialData),
-                images: tag && tag.poster ? [tag.poster] : []
+                ...(tag.name ? tag  : initialData),
+                images: tag && tag.poster ? [tag.poster] : [],
+                prevProps: tag
             };
         }
         return null;

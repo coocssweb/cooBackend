@@ -27,3 +27,12 @@ export const edit = (id, data) => {
         }
     };
 };
+
+export const remove = (id) => {
+    return {
+        types: [tagsActionTypes.REMOVE_TAG_REQUEST, tagsActionTypes.REMOVE_TAG_SUCCESS, tagsActionTypes.REMOVE_TAG_ERROR],
+        promise: () => {
+            return tagsApi.remove(id);
+        }
+    };
+};

@@ -29,7 +29,14 @@ class Base {
 
         return new Promise((resolve, reject) => {
             fetch(`${this.requestUrl}${idAddons}`, settings).then((response) => {
-                resolve(response.json());
+                return response.json();
+            }).then(response => {
+                if (method === 'put') {
+                    response.response = data;
+                } else if (method === 'delete') {
+                    response.response = {id};
+                }
+                resolve(response);
             }).catch((error) => {
                 reject(error);
             });

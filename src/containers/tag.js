@@ -20,6 +20,9 @@ function mapDispatchToProps (dispatch) {
         },
         edit: (id, data) => {
             return dispatch(tagsActions.edit(id, data));
+        },
+        remove: (id) => {
+            return dispatch(tagsActions.remove(id));
         }
     };
 }
