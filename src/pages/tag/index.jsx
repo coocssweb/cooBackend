@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import className from 'classnames';
-import { Button, Icon, Drawer, NoneData, Loading } from '@components';
+import { Button, Icon, Drawer, NoneData, Loading, Toast } from '@components';
 import TagForm from './form';
 
 class Index extends Component {
@@ -9,6 +9,7 @@ class Index extends Component {
         this.handleCreateClick = this.handleCreateClick.bind(this);
         this.handleEditClick = this.handleEditClick.bind(this);
         this.handleRemoveClick = this.handleRemoveClick.bind(this);
+        this.handleDrawerClose = this.handleDrawerClose.bind(this);
 
         this.state = {
             visible: false,
@@ -42,7 +43,19 @@ class Index extends Component {
     }
 
     handleRemoveClick () {
-        this.props.remove(this.state.tag.id);
+        this.props.remove(this.state.tag.id, (result) => {
+            Toast.tip(result.meta.code === 0 ? '删除成功' : result.meta.msg);
+            result.meta.code === 0 && setTimeout(() => {
+                this.handleDrawerClose();
+            }, 1000);
+        });
+    }
+
+    handleDrawerClose () {
+        this.setState({
+            visible: false,
+            tag: {}
+        });
     }
 
     render() {
@@ -94,10 +107,13 @@ class Index extends Component {
                 {
                     renderToolbar()
                 }
-                <Drawer placement={state.placement} visible={state.visible} size={380}>
+                <Drawer placement={state.placement}
+                        visible={state.visible}
+                        size={380}>
                     <TagForm
                         tag={state.tag}
                         onCreate={props.create}
+                        onClose={this.handleDrawerClose}
                         onEdit={props.edit} />
                     <Button fill
                             type="danger"

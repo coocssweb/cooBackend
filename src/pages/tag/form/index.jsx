@@ -1,7 +1,5 @@
 import React, {Component} from 'react';
-import propTypes from 'prop-types';
-import className from 'classnames';
-import { Input, Form, Uploader, Select } from '@components';
+import { Input, Form, Uploader, Select, Toast } from '@components';
 const { FormLine, FormItem } = Form;
 const { Option } = Select;
 
@@ -39,6 +37,13 @@ class Index extends Component {
         return null;
     }
 
+    saveCallback (result) {
+        Toast.tip(result.meta.code === 0 ? '保存成功' : result.meta.msg);
+        result.meta.code === 0 && !this.state.id && setTimeout(() => {
+            this.props.onClose();
+        }, 1000);
+    }
+
     handleSave () {
         const { state, props} = this;
 
@@ -47,8 +52,11 @@ class Index extends Component {
             poster: state.images[0]
         };
         delete postData.images;
-        !state.id ? props.onCreate(postData) : props.onEdit(state.id, postData);
-
+        if (state.id) {
+            props.onEdit(state.id, postData, this.saveCallback.bind(this))
+        } else {
+            props.onCreate(postData, this.saveCallback.bind(this))
+        }
     }
 
     handleSelectChange (value) {

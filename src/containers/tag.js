@@ -15,14 +15,14 @@ function mapDispatchToProps (dispatch) {
         fetch: () => {
             return dispatch(tagsActions.fetch());
         },
-        create: (data) => {
-            return dispatch(tagsActions.create(data));
+        create: (data, callback) => {
+            return dispatch(tagsActions.create(data, callback));
         },
-        edit: (id, data) => {
-            return dispatch(tagsActions.edit(id, data));
+        edit: (id, data, callback) => {
+            return dispatch(tagsActions.edit(id, data, callback));
         },
-        remove: (id) => {
-            return dispatch(tagsActions.remove(id));
+        remove: (id, callback) => {
+            return dispatch(tagsActions.remove(id, callback));
         }
     };
 }

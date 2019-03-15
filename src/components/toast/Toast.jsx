@@ -76,7 +76,7 @@ class Toast extends Component {
 }
 
 Toast.defaultProps = {
-    duration: 3000,
+    duration: 2000,
     type: 'tip',
 };
 

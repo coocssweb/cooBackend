@@ -47,7 +47,7 @@ const _addToast = (content, type, option, fn) => {
         });
     }
 
-    let { onClose, duration = 3000, closable = false } = option;
+    let { onClose, duration = 2000, closable = false } = option;
     _toast.add({
         content,
         duration,
