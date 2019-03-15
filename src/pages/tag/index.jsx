@@ -12,7 +12,7 @@ class Index extends Component {
         this.handleDrawerClose = this.handleDrawerClose.bind(this);
 
         this.state = {
-            visible: false,
+            visible: true,
             list: [],
             tag: {}
         };

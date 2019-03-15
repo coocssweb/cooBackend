@@ -19,3 +19,4 @@ export Uploader from './uploader';
 export Editor from './editor';
 export NoneData from './noneData';
 export Loading from './loading';
+export Alert from './alert';
