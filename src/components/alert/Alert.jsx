@@ -14,7 +14,7 @@ class Alert extends Component {
         return (
             <div className={className({'cooAlert': true, [`cooAlert-${props.type}`]: true})}>
                 { props.children }
-                    
+
             </div>
         );
     }
