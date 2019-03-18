@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import { Input, Form, Uploader, Select, Toast } from '@components';
+import { Input, Form, Uploader, Select, Toast, Validation } from '@components';
 const { FormLine, FormItem } = Form;
 const { Option } = Select;
 
@@ -86,6 +86,7 @@ class Index extends Component {
                         <Input size="large"
                                value={state.name}
                                onChange={this.handleInputChange.bind(this, 'name')}
+                               validations={[Validation.required.bind(this, '请输入名称')]}
                                placeholder="请输入名称" />
                     </FormItem>
                 </FormLine>
@@ -94,12 +95,16 @@ class Index extends Component {
                         <Input size="large"
                                value={state.path}
                                onChange={this.handleInputChange.bind(this, 'path')}
+                               validations={[Validation.required.bind(this, '请输入名称')]}
                                placeholder="请输入路径" />
                     </FormItem>
                 </FormLine>
                 <FormLine>
                     <FormItem label='标签'>
-                        <Select size="large" value={state.type}  onChange={this.handleSelectChange}>
+                        <Select size="large"
+                                value={state.type}
+                                onChange={this.handleSelectChange}
+                                validations={[Validation.required.bind(this, '请输入名称')]}>
                             <Option value="article">分享</Option>
                             <Option value="photos">图集</Option>
                             <Option value="music">音乐</Option>
@@ -108,7 +113,9 @@ class Index extends Component {
                 </FormLine>
                 <FormLine>
                     <FormItem label='描述'>
-                        <Input.TextArea size="large" value={state.description}
+                        <Input.TextArea size="large"
+                                        value={state.description}
+                                        validations={[Validation.required.bind(this, '请输入名称')]}
                                         onChange={this.handleInputChange.bind(this, 'description')}
                                         placeholder="请输入描述" />
                     </FormItem>
@@ -116,6 +123,7 @@ class Index extends Component {
                 <FormLine>
                     <FormItem label='封面'>
                         <Uploader token={`bearer ${localStorage.getItem('access_token')}`}
+                                  validations={[Validation.required.bind(this, '请输入名称')]}
                                   max={1}
                                   images={state.images}
                                   serverUrl={`${API}tool/upload`}

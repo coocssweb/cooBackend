@@ -57,3 +57,12 @@
         }
     }
 }
+
+.cooField-tip{
+    display: none;
+    margin-top: 5px;
+    color: $errorBorderColor;
+    &--show{
+        display: block;
+    }
+}

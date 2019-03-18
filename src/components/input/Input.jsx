@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import propTypes from 'prop-types';
 import className from 'classnames';
+import validateInput from '../hoc/validateInput';
 import { Icon } from '../icon';
 
 class Input extends Component {
@@ -32,7 +33,8 @@ class Input extends Component {
         const inputClassName = className({
             [prefixCls]: true,
             [`${prefixCls}--${props.size}`]: true,
-            [`${prefixCls}--readonly`]: props.readonly
+            [`${prefixCls}--readonly`]: props.readonly,
+            [`${prefixCls}--error`]: props.error
         });
 
         let opts = {
@@ -59,6 +61,7 @@ class Input extends Component {
             <div className={inputWrapperClassName} {...optsWrapper}>
                 <input className={inputClassName}
                        { ...opts }
+                       ref={props.inputRef}
                        readOnly={props.readonly}
                        onChange={this.onChange.bind(this)}
                        onFocus={this.onFocus.bind(this)} />
@@ -94,4 +97,4 @@ Input.propTypes = {
     defaultValue: propTypes.string
 };
 
-export default Input;
+export default validateInput(Input);

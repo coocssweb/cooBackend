@@ -4,6 +4,7 @@ import propTypes from 'prop-types';
 import className from 'classnames';
 import RcAlign from 'rc-align';
 import { CSSTransition } from 'react-transition-group';
+import validateInput from '../hoc/validateUncontrol';
 import Icon from '../icon';
 import Panel from './Panel';
 import { isNodeFound } from '../_util/domHelper';
@@ -155,8 +156,9 @@ class Select extends Component {
         }
         const selectClassName = className({
             'cooSelect': true,
-            [`cooSelect--${props.size}`]: true,
-            'cooSelect--disabled': props.disabled
+            'cooSelect--error': props.error,
+            'cooSelect--disabled': props.disabled,
+            [`cooSelect--${props.size}`]: true
         });
         const placeholderClassName = className({
             'cooSelect-placeholder': true,
@@ -234,4 +236,4 @@ Select.propTypes = {
     onChange: propTypes.func,
 };
 
-export default Select;
+export default validateInput(Select);

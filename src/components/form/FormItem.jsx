@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import propTypes from 'prop-types';
 import className from 'classnames';
+import RegisterContext from './registerContext';
 
 class FormItem extends Component {
     constructor(props) {
@@ -18,9 +19,13 @@ class FormItem extends Component {
                     ) : null
                 }
                 <div className={className('cooFormField')}>
-                {
-                    this.props.children
-                }
+                    <RegisterContext.Consumer>
+                        {
+                            _register => {
+                                return React.cloneElement(this.props.children, {_register})
+                            }
+                        }
+                    </RegisterContext.Consumer>
                 </div>
             </div>
         );

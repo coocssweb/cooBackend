@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import propTypes from 'prop-types';
 import className from 'classnames';
 import { Icon } from '../icon';
+import validateInput from '../hoc/validateInput';
 
 class Textarea extends Component {
     constructor (props) {
@@ -32,7 +33,8 @@ class Textarea extends Component {
         const inputClassName = className({
             [prefixCls]: true,
             [`${prefixCls}--${props.size}`]: true,
-            [`${prefixCls}--readonly`]: props.readonly
+            [`${prefixCls}--readonly`]: props.readonly,
+            [`${prefixCls}--error`]: props.error
         });
 
         let opts = {
@@ -55,6 +57,7 @@ class Textarea extends Component {
             <div className={inputWrapperClassName}>
                 <textarea className={inputClassName}
                           {...opts}
+                          ref={props.inputRef}
                           onChange={this.onChange.bind(this)}
                           onFocus={this.onFocus.bind(this)} />
                 {
@@ -88,4 +91,4 @@ Textarea.propTypes = {
     readonly: propTypes.bool,
 };
 
-export default Textarea;
+export default validateInput(Textarea);

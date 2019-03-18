@@ -105,6 +105,15 @@
             }
         }
     }
+
+    &--error{
+        .cooSelect {
+            &-header {
+                background-color: $errorColor;
+                border-color: $errorBorderColor;
+            }
+        }
+    }
 }
 
 .slideUp {

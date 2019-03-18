@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import propTypes from 'prop-types';
 import className from 'classnames';
+import validateInput from '../hoc/validateUncontrol';
 import Image from './Image';
 import Icon from '../icon';
 import util from '../_util';
@@ -13,7 +14,7 @@ class Uploader extends Component {
         this.onUpload = this.onUpload.bind(this);
         this.onClick = this.onClick.bind(this);
         this.state = {
-            images: []
+            value: []
         };
     }
 
@@ -21,7 +22,7 @@ class Uploader extends Component {
         const prevProps = state.prevProps || { images: [] };
         if (!_util.isEqualArray(props.images, prevProps.images)) {
             return {
-                images: props.images,
+                value: props.images,
                 prevProps: props
             };
         }
@@ -30,8 +31,8 @@ class Uploader extends Component {
     }
 
     shouldComponentUpdate (nextProps, nextState) {
-        const images = this.state.images;
-        const nextImages = nextState.images;
+        const images = this.state.value;
+        const nextImages = nextState.value;
 
         return !_util.isEqualArray(images, nextImages);
     }
@@ -64,7 +65,7 @@ class Uploader extends Component {
 
         const successFn = (response) => {
             const result = JSON.parse(response.currentTarget.responseText);
-            const images = [...this.state.images, result.response.filename];
+            const images = [...this.state.value, result.response.filename];
             this.setState({
                 images
             });
@@ -96,10 +97,10 @@ class Uploader extends Component {
     }
 
     onRemoveClick (index) {
-        const images = [...this.state.images];
+        const images = [...this.state.value];
         images.splice(index, 1);
         this.setState({
-            images
+            value: images
         });
     }
 
@@ -109,7 +110,7 @@ class Uploader extends Component {
         return (
             <div className={className('cooUploader cooClearfix')}>
                 {
-                    state.images.map((item, index) => {
+                    state.value.map((item, index) => {
                         return (
                             <Image key={item}
                                    imagePath={item}
@@ -121,7 +122,7 @@ class Uploader extends Component {
                 }
 
                 {
-                    state.images.length < props.max ? (
+                    state.value.length < props.max ? (
                         <a href="javascript:;"
                            className={className('cooUploader-button')}
                            onClick={this.onClick}><Icon type="add" /></a>
@@ -152,4 +153,4 @@ Uploader.propTypes = {
     token: propTypes.string
 };
 
-export default Uploader;
+export default validateInput(Uploader);
