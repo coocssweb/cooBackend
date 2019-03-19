@@ -66,6 +66,9 @@
             color: $colorGray;
             margin-top: 10px;
             cursor: auto;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+            overflow: hidden;
         }
     }
 }

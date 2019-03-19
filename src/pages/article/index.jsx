@@ -12,18 +12,39 @@ class Index extends Component {
         this.handleSelect = this.handleSelect.bind(this);
         this.state = {
             list: [],
+            total: [],
             article: null,
+            prevArticle: null
         };
     }
 
     componentDidMount () {
+        // 路由切换时，防止重新加载数据
+        if (this.props.list.size) {
+            return false;
+        }
+
         this.props.fetch();
     }
 
     static getDerivedStateFromProps (props, state) {
+        let article = null;
+        if (!props.list.size) {
+            // 列表无数据，如果是删除数据的，则置空编辑信息
+            article = (state.article && state.article.id) ? null : state.article
+        } else  if (state.total === 0 && props.list.size) {
+            // 添加首条成功后，获取首条数据
+            article  = props.list.get(0);
+        } else {
+            // 列表有数据，没有正在编辑的分享，则获取首篇文章
+            // 否则，保留原本的文章
+            article = !state.article ? props.list.get(0) : state.article
+        }
+
         return {
             list: props.list,
-            article: (!state.article && props.list.size) ? props.list.get(0) : state.article
+            total: props.list.size,
+            article
         };
     }
 

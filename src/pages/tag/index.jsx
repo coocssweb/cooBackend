@@ -24,6 +24,10 @@ class Index extends Component {
     }
 
     componentDidMount () {
+        // 路由切换时，不重复加载已有的数据
+        if (this.props.list.size) {
+            return false;
+        }
         this.props.fetch();
     }
 
