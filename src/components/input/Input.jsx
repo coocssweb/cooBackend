@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import propTypes from 'prop-types';
 import className from 'classnames';
 import validateInput from '../hoc/validateInput';
-import { Icon } from '../icon';
+import Icon from '../icon';
 
 class Input extends Component {
     constructor (props) {

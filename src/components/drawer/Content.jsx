@@ -54,11 +54,15 @@ class Content extends Component {
     }
 
     onMaskClick (evt) {
-        if (!this.props.maskClosable) {
+        const props = this.props;
+        if (!props.maskClosable) {
             return false;
         }
         if (!isNodeFound(evt.target, this.getNativeDOMNode())) {
             this.setStateVisible(false);
+            if ('onClose' in props) {
+                props.onClose();
+            }
         }
     }
 

@@ -13,6 +13,24 @@
         margin-right: 10px;
         margin-bottom: 10px;
         display: table;
+        position: relative;
+        &:hover{
+            .tagItem-remove{
+                display: block;
+            }
+        }
+        &-remove{
+            position: absolute;
+            right: 5px;
+            top: 5px;
+            text-decoration: none;
+            color: #ffffff;
+            font-size: 25px;
+            display: none;
+            &:hover{
+                opacity: .8;
+            }
+        }
         &-cell{
             display: table-cell;
             vertical-align: middle;

@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import propTypes from 'prop-types';
 import className from 'classnames';
-import { Icon } from '../icon';
+import Icon from '../icon';
 import validateInput from '../hoc/validateInput';
 
 class Textarea extends Component {

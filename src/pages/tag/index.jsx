@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import className from 'classnames';
-import { Button, Icon, Drawer, NoneData, Loading, Alert } from '@components';
+import { Button, Icon, Drawer, NoneData, Loading, Alert, Toast } from '@components';
 import TagForm from './form';
 
 class Index extends Component {
@@ -52,6 +52,24 @@ class Index extends Component {
         });
     }
 
+    handleRemove (item) {
+        if (this.state.submitting) {
+            return false;
+        }
+        this.setState({
+            submitting: true
+        });
+        this.props.remove(item.id, (result) => {
+            this.setState({
+                submitting: false
+            });
+            if (result.meta.code !== 0) {
+                Toast.tip(result.meta.error);
+
+            }
+        });
+    }
+
     render() {
         const { state, props } = this;
 
@@ -66,6 +84,10 @@ class Index extends Component {
                                 <div key={item.id}
                                      className={className('tagItem')}
                                      style={{ backgroundImage: `url(${item.poster})` }}>
+                                    <a href="javascript:;"
+                                       className={className('tagItem-remove')} onClick={this.handleRemove.bind(this, item)}>
+                                        <Icon type="delete" />
+                                    </a>
                                     <div className="tagItem-cell">
                                         <div className={className('tagItem-name')}>{ item.name }</div>
                                         <p className={className('tagItem-desc')}>{ item.description }</p>
@@ -98,12 +120,12 @@ class Index extends Component {
                 <Drawer title="编辑标签信息"
                         placement={state.placement}
                         visible={state.visible}
+                        onClose={() => { this.setState({ visible: false }); }}
                         size={380}>
                     <TagForm
                         tag={state.tag}
                         onCreate={props.create}
                         onClose={this.handleDrawerClose}
-                        onRemove={props.remove}
                         onEdit={props.edit} />
                 </Drawer>
             </div>

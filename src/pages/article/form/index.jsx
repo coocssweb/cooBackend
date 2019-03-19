@@ -1,7 +1,6 @@
 import React, {Component} from 'react';
-import propTypes from 'prop-types';
 import className from 'classnames';
-import { Button, Uploader, Editor } from '@components';
+import { Button, Uploader, Editor, Toast } from '@components';
 
 const initialData = {
     id: 0,
@@ -29,9 +28,20 @@ class Index extends Component {
 
     handleSave () {
         const { state, props} = this;
-        const content = this.editorRef.getContent() || '';
-        const title = this.inputRef.value || '无标题分享';
+        const content = (this.editorRef.getContent() || '').trim();
+        const title = this.inputRef.value.trim();
         const description = content.replace(/<[^>]*>/ig, '').substring(0, 50);
+
+        if (title === '') {
+            Toast.tip('请输入标题');
+            return;
+        }
+
+        if (description === '') {
+            Toast.tip('请输入内容');
+            return;
+        }
+
         const postData = {
             id: state.id,
             title: title,
@@ -79,7 +89,7 @@ class Index extends Component {
                 <div className={className('articleForm-title')}>
                     <input className={className('articleForm-input')}
                            defaultValue={state.title}
-                           placeholder="无标题分享"
+                           placeholder="请输入标题"
                            type="text" ref={ ref => {this.inputRef = ref} } />
                 </div>
                 <div className={className('articleForm-content')}>
