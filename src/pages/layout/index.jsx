@@ -3,7 +3,6 @@ import className from 'classnames';
 import { Route, NavLink } from 'react-router-dom';
 import Tag from '@containers/tag';
 import Article from '@containers/article';
-import ArticleForm from '@containers/articleForm';
 
 class index extends Component {
     constructor(props) {
@@ -39,7 +38,6 @@ class index extends Component {
                 <div className={className('layout-main')}>
                     <Route path="/tags" component={Tag} exact />
                     <Route path="/articles" component={Article} exact />
-                    <Route path="/article_form" component={ArticleForm} exact />
                 </div>
             </div>
         );

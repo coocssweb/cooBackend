@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
-import { Input, Form, Uploader, Select, Validation, Alert } from '@components';
+import { Input, Form, Uploader, Select, Validation, Alert, Button } from '@components';
+import className from 'classnames';
 const { FormLine, FormItem } = Form;
 const { Option } = Select;
 
@@ -18,6 +19,7 @@ class Index extends Component {
         this.handleSave = this.handleSave.bind(this);
         this.handleSelectChange = this.handleSelectChange.bind(this);
         this.handleUploaderChange = this.handleUploaderChange.bind(this);
+        this.handleRemoveClick = this.handleRemoveClick.bind(this);
         this.state = {
             ...initialData,
             prevProps: {},
@@ -48,12 +50,9 @@ class Index extends Component {
         this.setState({
             showAlert: true,
             alertType: result.meta.code === 0 ? '' : 'danger',
-            alertInfo: result.meta.code === 0 ? '标签信息更新成功' : result.meta.msg
+            alertInfo: result.meta.code === 0 ? '标签信息编辑成功' : result.meta.msg,
+            id: result.response.id
         });
-
-        result.meta.code === 0 && !this.state.id && setTimeout(() => {
-            this.props.onClose();
-        }, 1000);
     }
 
     handleSave () {
@@ -93,8 +92,25 @@ class Index extends Component {
         });
     }
 
+    handleRemoveClick () {
+        this.props.onRemove(this.state.id, (result) => {
+            this.setState({
+                ...initialData,
+                showAlert: true,
+                alertType: result.meta.code === 0 ? '' : 'danger',
+                alertInfo: result.meta.code === 0 ? '删除成功' : result.meta.msg
+            });
+        });
+    }
+
     render() {
         const state = this.state;
+        // 删除按钮样式
+        const removeButtonClass = className({
+            'tagRemove': true,
+            'tagRemove--show': !!state.id
+        });
+
         return (
             <React.Fragment>
                 { state.showAlert ? (<Alert onClose={() => { this.setState({ showAlert: false }) }}>{ state.alertInfo }</Alert>) : null }
@@ -149,6 +165,11 @@ class Index extends Component {
                         </FormItem>
                     </FormLine>
                 </Form>
+                <Button fill
+                        type="danger"
+                        size="large"
+                        onClick={this.handleRemoveClick}
+                        className={removeButtonClass}>删除这条记录</Button>
             </React.Fragment>
         );
     }

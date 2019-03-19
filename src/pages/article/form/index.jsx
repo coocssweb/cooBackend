@@ -1,29 +1,56 @@
 import React, {Component} from 'react';
 import propTypes from 'prop-types';
 import className from 'classnames';
-import { Button, Uploader, Editor, Drawer, Form, Input } from '@components';
-const { TextArea } = Input;
-const { FormLine, FormItem } = Form;
+import { Button, Uploader, Editor } from '@components';
+
+const initialData = {
+    id: 0,
+    title: '',
+    description: '',
+    content: '',
+    tagId: 0,
+    posters: []
+};
+
 class Index extends Component {
     constructor(props) {
         super(props);
-        this.handleEditorChange = this.handleEditorChange.bind(this);
         this.handleSave = this.handleSave.bind(this);
         this.handleUpload = this.handleUpload.bind(this);
         this.handleUploaderClick = this.handleUploaderClick.bind(this);
+        this.handleUploaderChange = this.handleUploaderChange.bind(this);
         let height = window.innerHeight - 400;
         this.state = {
             visible: false,
-            height
+            height,
+            ...(props.article || initialData)
         };
     }
 
-    handleEditorChange () {
+    handleSave () {
+        const { state, props} = this;
+        const content = this.editorRef.getContent() || '';
+        const title = this.inputRef.value || '无标题分享';
+        const description = content.replace(/<[^>]*>/ig, '').substring(0, 50);
+        const postData = {
+            id: state.id,
+            title: title,
+            description,
+            posters: state.posters,
+            content
+        };
 
+        if (state.id) {
+            props.onEdit(state.id, postData, this.saveCallback.bind(this))
+        } else {
+            props.onCreate(postData, this.saveCallback.bind(this))
+        }
     }
 
-    handleSave () {
-
+    saveCallback (result) {
+        this.setState({
+            id: result.response.id
+        });
     }
 
     handleUpload (param) {
@@ -36,37 +63,39 @@ class Index extends Component {
         });
     }
 
+    handleUploaderChange (images) {
+        this.setState({
+            posters: images
+        });
+    }
+
     render () {
         const state = this.state;
         const { height, placement } = state;
         return (
             <div className={className('articleForm')}>
                 <div className={className('articleForm-title')}>
-                    <input className={className('articleForm-input')} placeholder="请输入标题" type="text" />
+                    <input className={className('articleForm-input')}
+                           defaultValue={state.title}
+                           placeholder="无标题分享"
+                           type="text" ref={ ref => {this.inputRef = ref} } />
                 </div>
                 <div className={className('articleForm-content')}>
-                    <Editor height={height} content="" onChange={this.handleEditorChange} />
+                    <Editor height={height}
+                            content={state.content}
+                            ref={ ref => {this.editorRef = ref} } />
                 </div>
                 <div className={className('articleForm-photo')}>
-                    <Uploader onClick={this.handleUploaderClick} max={2} images={['https://photo.tuchong.com/1732720/ft640/83757108.webp']} />
+                    <Uploader token={`bearer ${localStorage.getItem('access_token')}`}
+                              onClick={this.handleUploaderClick}
+                              onChange={this.handleUploaderChange}
+                              max={5}
+                              serverUrl={`${API}tool/upload`}
+                              images={state.posters} />
                 </div>
                 <div className={className('articleForm-toolbar')}>
                     <Button onClick={this.handleSave}>保存数据</Button>
                 </div>
-                <Drawer placement={state.placement} visible={state.visible} size={380}>
-                    <Form title='编辑图片信息'>
-                        <FormLine>
-                            <FormItem label='图片:'>
-                                <Uploader readonly images={['https://photo.tuchong.com/1732720/ft640/83757108.webp']} />
-                            </FormItem>
-                        </FormLine>
-                        <FormLine>
-                            <FormItem label='描述'>
-                                <TextArea size="large" placeholder="请输入描述信息" />
-                            </FormItem>
-                        </FormLine>
-                    </Form>
-                </Drawer>
             </div>
         );
     }

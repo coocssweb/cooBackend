@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import className from 'classnames';
-import { Button, Icon, Drawer, NoneData, Loading, Toast, Alert } from '@components';
+import { Button, Icon, Drawer, NoneData, Loading, Alert } from '@components';
 import TagForm from './form';
 
 class Index extends Component {
@@ -8,7 +8,6 @@ class Index extends Component {
         super(props);
         this.handleCreateClick = this.handleCreateClick.bind(this);
         this.handleEditClick = this.handleEditClick.bind(this);
-        this.handleRemoveClick = this.handleRemoveClick.bind(this);
         this.handleDrawerClose = this.handleDrawerClose.bind(this);
 
         this.state = {
@@ -39,15 +38,6 @@ class Index extends Component {
         this.setState({
             visible: true,
             tag
-        });
-    }
-
-    handleRemoveClick () {
-        this.props.remove(this.state.tag.id, (result) => {
-            Toast.tip(result.meta.code === 0 ? '删除成功' : result.meta.msg);
-            result.meta.code === 0 && setTimeout(() => {
-                this.handleDrawerClose();
-            }, 1000);
         });
     }
 
@@ -92,12 +82,6 @@ class Index extends Component {
                 </div>
             ) : null;
         };
-
-        // 删除按钮样式
-        const removeButtonClass = className({
-            'tagRemove': true,
-            'tagRemove--show': !!state.tag.id
-        });
         
         return (
             <div className={className('page tagPage')}>
@@ -107,19 +91,16 @@ class Index extends Component {
                 {
                     renderToolbar()
                 }
-                <Drawer title="编辑标签信息" placement={state.placement}
+                <Drawer title="编辑标签信息"
+                        placement={state.placement}
                         visible={state.visible}
                         size={380}>
                     <TagForm
                         tag={state.tag}
                         onCreate={props.create}
                         onClose={this.handleDrawerClose}
+                        onRemove={props.remove}
                         onEdit={props.edit} />
-                    <Button fill
-                            type="danger"
-                            size="large"
-                            onClick={this.handleRemoveClick}
-                            className={removeButtonClass}>删除这条记录</Button>
                 </Drawer>
             </div>
         );

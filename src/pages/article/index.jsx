@@ -1,49 +1,73 @@
 import React, {Component} from 'react';
 import className from 'classnames';
-import { Button, Icon, Drawer } from '@components';
+import { Button, Icon, Drawer, NoneData } from '@components';
 import ArticleForm from './form';
 import ArticleItem from './articleItem';
-import ArticleDetailForm from './detailForm';
+
 class Index extends Component {
     constructor(props) {
         super(props);
         this.handleCreateClick = this.handleCreateClick.bind(this);
+        this.handleRemove = this.handleRemove.bind(this);
+        this.handleSelect = this.handleSelect.bind(this);
         this.state = {
-            articles: [
-                {
-                    id: 10,
-                    title: '家是一个令人眩晕的洞',
-                    posters: ['https://img3.doubanio.com/view/note/l/public/p57911904.webp'],
-                    description: '编者按：跳水蛙、冷吃兔、灯会和恐龙化石遗址，今天，韩松带我们游览四川自贡了！未来某天，自贡高铁站热闹欢腾，霓虹闪烁？'
-                },
-                {
-                    id: 11,
-                    title: '家是一个令人眩晕的洞',
-                    posters: ['https://img3.doubanio.com/view/note/l/public/p57911904.webp'],
-                    description: '编者按：跳水蛙、冷吃兔、灯会和恐龙化石遗址，今天，韩松带我们游览四川自贡了！未来某天，自贡高铁站热闹欢腾，霓虹闪烁？'
-                },
-                {
-                    id: 12,
-                    title: '家是一个令人眩晕的洞',
-                    posters: ['https://img3.doubanio.com/view/note/l/public/p57911904.webp'],
-                    description: '编者按：跳水蛙、冷吃兔、灯会和恐龙化石遗址，今天，韩松带我们游览四川自贡了！未来某天，自贡高铁站热闹欢腾，霓虹闪烁？'
-                },
-                {
-                    id: 13,
-                    title: '家是一个令人眩晕的洞',
-                    posters: ['https://img3.doubanio.com/view/note/l/public/p57911904.webp'],
-                    description: '编者按：跳水蛙、冷吃兔、灯会和恐龙化石遗址，今天，韩松带我们游览四川自贡了！未来某天，自贡高铁站热闹欢腾，霓虹闪烁？'
-                }
-            ]
+            list: [],
+            article: null,
+        };
+    }
+
+    componentDidMount () {
+        this.props.fetch();
+    }
+
+    static getDerivedStateFromProps (props, state) {
+        return {
+            list: props.list,
+            article: (!state.article && props.list.size) ? props.list.get(0) : state.article
         };
     }
 
     handleCreateClick () {
+        this.setState({
+            article: {}
+        });
+    }
 
+    handleRemove (article) {
+        this.props.remove(article.id, (result) => {
+            console.log(result);
+        });
+    }
+
+    handleSelect (article) {
+        if (article.id === this.state.id) {
+            return false;
+        }
+        this.setState({
+            article
+        });
     }
 
     render () {
-        const state = this.state;
+        const { state, props} = this;
+        const articleId = state.article ? state.article.id : null;
+        const renderList = () => {
+            return state.list.size === 0 ? (
+                <NoneData loading={props.loading}>没有找到文件</NoneData>
+            ) : (
+                <div className={className('articleList')}>
+                    {
+                        state.list.map(item => <ArticleItem
+                            key={item.id} article={item}
+                            selected={articleId === item.id}
+                            onRemove={this.handleRemove}
+                            onSelect={this.handleSelect}
+                        />)
+                    }
+                </div>
+            );
+        };
+
         return (
             <div className={className('page articlePage clearfix')}>
                 <div className={className('articleLeft')}>
@@ -51,11 +75,19 @@ class Index extends Component {
                         <Button onClick={this.handleCreateClick}>添加分享<Icon type="add" /></Button>
                     </div>
                     <div className={className('articleList')}>
-                        { state.articles.map(item => <ArticleItem key={item.id} article={item}  />) }
+                        { renderList() }
                     </div>
                 </div>
                 <div className="articleRight">
-                    <ArticleForm />
+                    {
+                        state.article ?
+                            (
+                                <ArticleForm key={state.article.id}
+                                          article={state.article}
+                                          onCreate={props.create}
+                                          onEdit={props.edit} />
+                            ) : null
+                    }
                 </div>
             </div>
         );

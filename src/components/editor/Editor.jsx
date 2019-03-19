@@ -9,19 +9,20 @@ class Editor extends Component {
         this.handleUpload = this.handleUpload.bind(this);
         this.state = {
             height: props.height,
-            editorState: BraftEditor.createEditorState(null)
+            editorState: BraftEditor.createEditorState(props.content)
         };
     }
 
-    handleEditorChange () {
-        const props = this.props;
-        if ('onChange' in props) {
-            props.onChange();
-        }
+    handleEditorChange (editorState) {
+        this.setState({ editorState });
+    }
+
+    getContent () {
+        return this.state.editorState.toHTML();
     }
 
     handleUpload (param) {
-        const serverURL = 'http://upload-server'
+        const serverURL = 'http://upload-server';
         const xhr = new XMLHttpRequest;
         const fd = new FormData();
 

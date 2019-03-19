@@ -54,7 +54,7 @@ NoneData.propTypes = {
 };
 
 NoneData.defaultProps = {
-    buttonName: '添加',
+    buttonName: '',
     loading: true
 };
 

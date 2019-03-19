@@ -5,8 +5,8 @@
     display: block;
 
     &--primary{
-        background-color: $blue;
-        color: $white;
+        background-color:#c2e4e7;
+        color: #484848;
     }
     &--success{
         background-color: $green;
@@ -29,6 +29,6 @@
         right: 10px;
         top: 10px;
         text-decoration: none;
-        color: $white;
+        color: $blue;
     }
 }

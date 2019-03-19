@@ -6,33 +6,43 @@ import { Button, Icon } from '@components';
 class ArticleItem extends Component {
     constructor(props) {
         super(props);
-        this.onDelete = this.onDelete.bind(this);
+        this.handleRemove = this.handleRemove.bind(this);
+        this.handleSelect = this.handleSelect.bind(this);
         this.state = {
             open: false
         };
     }
 
-    onDelete () {
-        this.setState((prevState) => {
-            return {
-                open: !prevState.open
-            };
-        });
+    handleRemove () {
+        const props = this.props;
+        props.onRemove(props.article);
+    }
+
+    handleSelect () {
+        const props = this.props;
+        props.onSelect(props.article);
     }
 
     render() {
         const { props, state} = this;
         const article = props.article;
+        const itemClassName = className({
+            'articleItem': true,
+            'articleItem--selected': props.selected
+        });
+
         return (
-            <div className={className('articleItem')}>
-                <Button type="normal" size="small" className={className('articleItem-edit')}>编辑</Button>
+            <div className={itemClassName} onClick={ this.handleSelect }>
+                <Button type="normal"
+                        size="small"
+                        onClick={this.handleRemove}
+                        className={className('articleItem-remove')}>删除</Button>
                 <div className={className('articleItem-title')}>
                     { article.title }
                 </div>
                 <div className={className('articleItem-description')}>
                     { article.description }
                 </div>
-                <a href="javascript:;" className={className('articleItem-toggle')} onClick={this.onDelete}>删除</a>
             </div>
         );
     }

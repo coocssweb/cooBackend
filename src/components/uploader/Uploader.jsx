@@ -14,7 +14,7 @@ class Uploader extends Component {
         this.onUpload = this.onUpload.bind(this);
         this.onClick = this.onClick.bind(this);
         this.state = {
-            value: []
+            value: props.images
         };
     }
 

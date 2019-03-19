@@ -34,21 +34,30 @@
 
     &Item{
         background-color: $colorWhite;
-        padding: 15px 15px 25px 15px;
+        padding: 15px;
         border-bottom: 1px solid $normalBorderColor;
         position: relative;
-        cursor: pointer;
         &:hover{
+            background-color: #eaf0fb;
+            .articleItem{
+                &-remove{
+                    display: block !important;
+                }
+            }
+        }
+        &--selected{
             background-color: #eaf0fb;
         }
         &-title{
             font-size: 14px;
             color: $colorGrayDarker;
+            cursor: auto;
         }
-        &-edit{
+        &-remove{
             position: absolute !important;
             right: 10px;
             top: 10px;
+            display: none !important;
         }
         &-description{
             position: relative;
@@ -56,22 +65,7 @@
             line-height: 1.5;
             color: $colorGray;
             margin-top: 10px;
-        }
-        &-toggle{
-            position: absolute !important;
-            bottom: 5px;
-            color: $colorGray;
-            font-size: 12px;
-            text-decoration: underline;
-            &:hover{
-                color: $colorBlack;
-            }
-        }
-    }
-    &Child-list{
-        display: none;
-        &--open{
-            display: block;
+            cursor: auto;
         }
     }
 }

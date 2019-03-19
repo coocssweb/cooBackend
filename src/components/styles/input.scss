@@ -31,7 +31,7 @@
         padding: 10px 10px;
         font-size: 14px;
         line-height: 24px;
-        width: 300px;
+        width: 320px;
         border-radius: $borderRadiusLarge;
     }
     &--readonly{
@@ -60,6 +60,7 @@
     border: 1px solid $borderInputColor;
     color: $colorGrayDark;
     resize: none;
+    box-sizing: border-box;
     &:focus{
         border-color: $borderInputFocusColor;
     }
@@ -78,7 +79,7 @@
         padding: 10px 10px;
         font-size: 14px;
         line-height: 24px;
-        width: 300px;
+        width: 320px;
         border-radius: $borderRadiusLarge;
     }
 
