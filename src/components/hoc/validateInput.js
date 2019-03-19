@@ -19,13 +19,23 @@ export default (WrappedComponent) => {
             };
         }
         componentDidMount () {
-            // console.log(this.props.register);
             // 注册组件
             this.props._register && this.props._register(this);
         }
+
+        // 重置状态
+        onReset () {
+            this.setState({
+                error: false,
+                errorTip: ''
+            });
+        }
+
         onValidate () {
             const { validations } = this.props;
             const value = this.inputRef.current.value;
+
+            let flag = true;
             for (let validation of validations) {
                 let tip = validation(value);
                 if (tip) {
@@ -33,9 +43,12 @@ export default (WrappedComponent) => {
                         error: true,
                         errorTip: tip
                     });
+                    flag = false;
                     break;
                 }
             }
+
+            return flag;
         }
 
         handleChange (value) {

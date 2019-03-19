@@ -14,6 +14,10 @@ class Form extends Component {
         };
     }
 
+    componentDidMount () {
+
+    }
+
     // 子组件注册到components,
     // 用于组件的批量提交
     _register (component) {
@@ -31,10 +35,21 @@ class Form extends Component {
         }
     }
 
+    // 重置状态
+    reset () {
+        this.state.components.map((component) => {
+            return component.onReset();
+        });
+    }
+
     validateAll () {
-        return this.state.components.map((component) => {
+        const result = this.state.components.map((component) => {
             return component.onValidate();
-        }).reduce((prev, current) => prev && current);
+        });
+
+        return result.reduce((prev, current) => {
+            return prev && current
+        });
     }
 
     render () {

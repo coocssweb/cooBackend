@@ -6,15 +6,38 @@ import Icon from '../icon';
 class Alert extends Component {
     constructor (props) {
         super(props);
-        this.state = {};
+        this.state = {
+            closed: false
+        }
+    }
+
+    onClose () {
+        const props = this.props;
+        this.setState({
+            closed: true
+        });
+        if ('onClose' in props) {
+            props.onClose();
+        }
     }
 
     render () {
-        const props = this.props;
-        return (
-            <div className={className({'cooAlert': true, [`cooAlert-${props.type}`]: true})}>
-                { props.children }
+        const { props, state} = this;
+        const alertClassName = className({
+            'cooAlert': true,
+            [`cooAlert--${props.type}`]: true
+        });
 
+        return closed ? null : (
+            <div className={alertClassName}>
+                { props.children }
+                {
+                    props.closable ?
+                        (<a href="javascript:;"
+                            className={className('cooAlert-close')}
+                            onClick={this.onClose.bind(this)}><Icon type="close" /></a>)
+                        : null
+                }
             </div>
         );
     }
@@ -22,13 +45,12 @@ class Alert extends Component {
 
 Alert.defaultProps = {
     closable: true,
-    duration: 2000,
+    type: 'primary'
 };
 
 Alert.propTypes ={
     type: propTypes.oneOf(['primary', 'success', 'normal', 'danger', 'white']),
-    closable: propTypes.bool,
-    duration: propTypes.number
+    closable: propTypes.bool
 };
 
 export default Alert;

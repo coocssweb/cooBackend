@@ -1,3 +1,4 @@
+import * as validation from './_util/validation';
 import './styles/index.scss';
 export Select from './select';
 export Modal from './modal';
@@ -21,5 +22,4 @@ export NoneData from './noneData';
 export Loading from './loading';
 export Alert from './alert';
 
-import * as validation from './_util/validation';
 export const Validation = validation;

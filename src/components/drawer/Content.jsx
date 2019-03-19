@@ -180,7 +180,8 @@ class Content extends Component {
 }
 
 Content.propTypes = {
-    placement: propTypes.string
+    placement: propTypes.string,
+    title: propTypes.string
 };
 
 export default Content;

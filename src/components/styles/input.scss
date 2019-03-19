@@ -86,4 +86,9 @@
         position: relative;
         display: inline-block;
     }
+
+    &--error{
+        background-color: $errorColor;
+        border-color: $errorBorderColor;
+    }
 }

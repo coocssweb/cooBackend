@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import className from 'classnames';
-import { Button, Icon, Drawer, NoneData, Loading, Toast } from '@components';
+import { Button, Icon, Drawer, NoneData, Loading, Toast, Alert } from '@components';
 import TagForm from './form';
 
 class Index extends Component {
@@ -14,7 +14,7 @@ class Index extends Component {
         this.state = {
             visible: false,
             list: [],
-            tag: {}
+            tag: {},
         };
     }
 
@@ -107,7 +107,7 @@ class Index extends Component {
                 {
                     renderToolbar()
                 }
-                <Drawer placement={state.placement}
+                <Drawer title="编辑标签信息" placement={state.placement}
                         visible={state.visible}
                         size={380}>
                     <TagForm

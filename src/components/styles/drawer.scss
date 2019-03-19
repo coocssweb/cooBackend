@@ -13,6 +13,12 @@
             display: none;
         }
     }
+    &-header{
+        background-color: #edefed;
+        border-bottom: 1px solid $normalBorderColor;
+        padding: 15px 20px;
+        color: #999;
+    }
     &-wrap{
         position: fixed;
         transition: all .3s ease;
@@ -26,28 +32,28 @@
             right: 0px;
             left: 0px;
             animation: cooSlideTopIn .3s ease;
-            border-bottom: 1px solid $normalBorderColor;
+            //border-bottom: 1px solid $normalBorderColor;
         }
         &--right{
             top: 0px;
             bottom: 0px;
             right: 0px;
             animation: cooSlideRightIn .3s ease;
-            border-left: 1px solid $normalBorderColor;
+            //border-left: 1px solid $normalBorderColor;
         }
         &--bottom{
             bottom: 0px;
             left: 0px;
             right: 0px;
             animation: cooSlideBottomIn .3s ease;
-            border-top: 1px solid $normalBorderColor;
+            //border-top: 1px solid $normalBorderColor;
         }
         &--left{
             left: 0px;
             top: 0px;
             bottom: 0px;
             animation: cooSlideLeftIn .3s ease;
-            border-right: 1px solid $normalBorderColor;
+            //border-right: 1px solid $normalBorderColor;
         }
     }
     &-header{
