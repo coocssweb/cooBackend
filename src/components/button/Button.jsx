@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import propTypes from 'prop-types';
 import className from 'classnames';
 import Icon from '../icon';
+import Loading from '../loading';
 
 class Button extends Component {
     constructor (props) {
@@ -9,10 +10,13 @@ class Button extends Component {
         this.state = {};
     }
 
-    onClick () {
+    onClick (e) {
         const props = this.props;
+        if (props.loading) {
+            return false;
+        }
         if ('onClick' in props) {
-            props.onClick();
+            props.onClick(e);
         }
     }
 
@@ -34,9 +38,8 @@ class Button extends Component {
             <button className={buttonClassName}
                     onClick={this.onClick.bind(this)}>
                 {
-                    props.loading ? (<Icon type="loading" />) : null
+                    props.loading ? (<Loading color={ props.fill ? '#FFFFFF' : '' } />) : this.props.children
                 }
-                { this.props.children }
             </button>
         );
     }

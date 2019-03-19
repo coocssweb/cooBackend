@@ -72,7 +72,7 @@ class Form extends Component {
                     </RegisterContext.Provider>
                 </div>
                 <div className={className('cooForm-footer')}>
-                    <Button fill type="primary" size="large" onClick={this.onSave}>保存</Button>
+                    <Button loading={props.submitting} fill type="primary" size="large" onClick={this.onSave}>保存</Button>
                 </div>
             </div>
         );
@@ -81,12 +81,14 @@ class Form extends Component {
 
 Form.defaultProps = {
     direction: 'vertical',
-    title: null
+    title: null,
+    submitting: false
 };
 
 Form.propTypes = {
     direction: propTypes.string,
-    title: propTypes.string
+    title: propTypes.string,
+    submitting: propTypes.bool
 };
 
 export default Form;

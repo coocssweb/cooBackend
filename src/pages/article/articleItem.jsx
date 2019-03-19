@@ -9,13 +9,22 @@ class ArticleItem extends Component {
         this.handleRemove = this.handleRemove.bind(this);
         this.handleSelect = this.handleSelect.bind(this);
         this.state = {
-            open: false
+            open: false,
+            submitting: false
         };
     }
 
-    handleRemove () {
+    handleRemove (e) {
+        e.stopPropagation();
         const props = this.props;
-        props.onRemove(props.article);
+        this.setState({
+            submitting: true
+        });
+        props.onRemove(props.article, () => {
+            this.setState({
+                submitting: false
+            });
+        });
     }
 
     handleSelect () {
@@ -35,6 +44,7 @@ class ArticleItem extends Component {
             <div className={itemClassName} onClick={ this.handleSelect }>
                 <Button type="normal"
                         size="small"
+                        loading={state.submitting}
                         onClick={this.handleRemove}
                         className={className('articleItem-remove')}>删除</Button>
                 <div className={className('articleItem-title')}>

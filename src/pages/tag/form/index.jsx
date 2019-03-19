@@ -27,6 +27,7 @@ class Index extends Component {
             alertInfo: '',
             alertType: '',
             showAlert: false,
+            submitting: false
         };
     }
 
@@ -51,12 +52,16 @@ class Index extends Component {
             showAlert: true,
             alertType: result.meta.code === 0 ? '' : 'danger',
             alertInfo: result.meta.code === 0 ? '标签信息编辑成功' : result.meta.msg,
-            id: result.response.id
+            id: result.response.id,
+            submitting: false
         });
     }
 
     handleSave () {
         const { state, props} = this;
+        this.setState({
+            submitting: true
+        });
 
         const postData = {
             id: state.id,
@@ -66,12 +71,13 @@ class Index extends Component {
             description: state.description,
             poster: state.images[0]
         };
-
-        if (state.id) {
-            props.onEdit(state.id, postData, this.saveCallback.bind(this))
-        } else {
-            props.onCreate(postData, this.saveCallback.bind(this))
-        }
+        setTimeout(() => {
+            if (state.id) {
+                props.onEdit(state.id, postData, this.saveCallback.bind(this))
+            } else {
+                props.onCreate(postData, this.saveCallback.bind(this))
+            }
+        }, 500);
     }
 
     handleSelectChange (value) {
@@ -114,7 +120,7 @@ class Index extends Component {
         return (
             <React.Fragment>
                 { state.showAlert ? (<Alert onClose={() => { this.setState({ showAlert: false }) }}>{ state.alertInfo }</Alert>) : null }
-                <Form ref={ state.formRef } onSave={this.handleSave}>
+                <Form submitting={state.submitting} ref={ state.formRef } onSave={this.handleSave}>
                     <FormLine>
                         <FormItem label='名称'>
                             <Input size="large"

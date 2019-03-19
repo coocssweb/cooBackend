@@ -16,14 +16,14 @@ class Index extends Component {
     constructor(props) {
         super(props);
         this.handleSave = this.handleSave.bind(this);
-        this.handleUpload = this.handleUpload.bind(this);
         this.handleUploaderClick = this.handleUploaderClick.bind(this);
         this.handleUploaderChange = this.handleUploaderChange.bind(this);
         let height = window.innerHeight - 400;
         this.state = {
             visible: false,
             height,
-            ...(props.article || initialData)
+            ...(props.article || initialData),
+            submitting: false
         };
     }
 
@@ -40,21 +40,23 @@ class Index extends Component {
             content
         };
 
+        this.setState({
+            submitting: true
+        });
+
         if (state.id) {
-            props.onEdit(state.id, postData, this.saveCallback.bind(this))
+            props.onEdit(state.id, postData, this.handleDone.bind(this));
         } else {
-            props.onCreate(postData, this.saveCallback.bind(this))
+            props.onCreate(postData, this.handleDone.bind(this));
         }
     }
 
-    saveCallback (result) {
-        this.setState({
-            id: result.response.id
-        });
-    }
-
-    handleUpload (param) {
-
+    handleDone () {
+        setTimeout(() => {
+            this.setState({
+                submitting: false
+            });
+        }, 500);
     }
 
     handleUploaderClick (item, index) {
@@ -94,7 +96,7 @@ class Index extends Component {
                               images={state.posters} />
                 </div>
                 <div className={className('articleForm-toolbar')}>
-                    <Button onClick={this.handleSave}>保存数据</Button>
+                    <Button loading={state.submitting} onClick={this.handleSave}>保存数据</Button>
                 </div>
             </div>
         );

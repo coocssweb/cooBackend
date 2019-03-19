@@ -7,19 +7,19 @@ import ArticleItem from './articleItem';
 class Index extends Component {
     constructor(props) {
         super(props);
-        this.handleCreateClick = this.handleCreateClick.bind(this);
+        this.handleNewClick = this.handleNewClick.bind(this);
+        this.handleEdit = this.handleEdit.bind(this);
+        this.handleCreate = this.handleCreate.bind(this);
         this.handleRemove = this.handleRemove.bind(this);
         this.handleSelect = this.handleSelect.bind(this);
         this.state = {
             list: [],
-            total: [],
             article: null,
             prevArticle: null
         };
     }
 
     componentDidMount () {
-        // 路由切换时，防止重新加载数据
         if (this.props.list.size) {
             return false;
         }
@@ -30,33 +30,42 @@ class Index extends Component {
     static getDerivedStateFromProps (props, state) {
         let article = null;
         if (!props.list.size) {
-            // 列表无数据，如果是删除数据的，则置空编辑信息
+            // 清空列表数据，则置空编辑信息
             article = (state.article && state.article.id) ? null : state.article
-        } else  if (state.total === 0 && props.list.size) {
-            // 添加首条成功后，获取首条数据
-            article  = props.list.get(0);
         } else {
             // 列表有数据，没有正在编辑的分享，则获取首篇文章
             // 否则，保留原本的文章
-            article = !state.article ? props.list.get(0) : state.article
+            article = !state.article ? props.list.get(0) : state.article;
         }
 
         return {
             list: props.list,
-            total: props.list.size,
             article
         };
     }
 
-    handleCreateClick () {
+    handleNewClick () {
         this.setState({
             article: {}
         });
     }
 
-    handleRemove (article) {
+    handleRemove (article, done) {
         this.props.remove(article.id, (result) => {
-            console.log(result);
+            if (result.meta.code !== 0) {
+                done();
+                return false;
+            }
+            // 删除正在编辑的数据
+            if (article.id === this.state.article.id) {
+                // 中间件最后一节会引起state变化
+                // 所以，做setTimeout
+                setTimeout(() => {
+                    this.setState({
+                        article: null
+                    });
+                }, 0);
+            }
         });
     }
 
@@ -66,6 +75,28 @@ class Index extends Component {
         }
         this.setState({
             article
+        });
+    }
+
+    handleCreate (article, done) {
+        this.props.create(article, (result) => {
+            done();
+            if (result.meta.code !== 0) {
+                return false;
+            }
+
+            this.setState({
+                article: result.response
+            });
+        });
+    }
+
+    handleEdit (id, article, done) {
+        this.props.edit(id, article, (result) => {
+            done();
+            if (result.meta.code === 0) {
+
+            }
         });
     }
 
@@ -93,7 +124,7 @@ class Index extends Component {
             <div className={className('page articlePage clearfix')}>
                 <div className={className('articleLeft')}>
                     <div className={className('articleToolbar')}>
-                        <Button onClick={this.handleCreateClick}>添加分享<Icon type="add" /></Button>
+                        <Button onClick={this.handleNewClick}>添加分享<Icon type="add" /></Button>
                     </div>
                     <div className={className('articleList')}>
                         { renderList() }
@@ -105,8 +136,8 @@ class Index extends Component {
                             (
                                 <ArticleForm key={state.article.id}
                                           article={state.article}
-                                          onCreate={props.create}
-                                          onEdit={props.edit} />
+                                          onCreate={this.handleCreate}
+                                          onEdit={this.handleEdit} />
                             ) : null
                     }
                 </div>
