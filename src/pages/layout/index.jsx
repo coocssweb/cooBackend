@@ -11,6 +11,10 @@ class Index extends Component {
         this.state = {};
     }
 
+    componentDidMount () {
+        document.title = '主页';
+    }
+
     render() {
         const {match} = this.props;
         return (

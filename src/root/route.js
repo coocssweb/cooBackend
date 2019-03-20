@@ -9,7 +9,7 @@ export default function () {
     const Entry = () => {
         return (
             <Switch>
-                <Route path="/main" component={Layout} />
+                <Route path="/main" component={Layout}  />
                 <Route path="/login" component={Login} exact />
             </Switch>
         );
