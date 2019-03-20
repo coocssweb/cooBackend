@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import className from 'classnames';
 import { NavLink } from 'react-router-dom';
 import { Dropdown } from '@components';
+import {withRouter} from "react-router-dom";
 
 class User extends Component {
     constructor (props) {
@@ -23,7 +24,9 @@ class User extends Component {
     }
 
     handleLogout () {
-        this.props.logout();
+        this.props.logout(() => {
+            this.props.history.replace('/login');
+        });
     }
 
     render () {
@@ -59,4 +62,4 @@ class User extends Component {
     }
 }
 
-export default User;
+export default withRouter(User);

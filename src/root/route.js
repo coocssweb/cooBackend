@@ -1,5 +1,6 @@
 import React from 'react';
 import { HashRouter as Router, Route, Switch } from 'react-router-dom';
+import history from './history';
 import Layout from '@containers/layout';
 import Login from '@containers/login';
 
@@ -15,7 +16,7 @@ export default function () {
     };
 
     return (
-        <Router>
+        <Router history={history}>
             <Route component={Entry}>
             </Route>
         </Router>

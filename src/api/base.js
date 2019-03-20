@@ -1,4 +1,5 @@
 import 'whatwg-fetch';
+import history from '../root/history';
 
 class Base {
     constructor (path) {
@@ -35,6 +36,9 @@ class Base {
                     // 移除token
                     // 路由跳转
                     localStorage.removeItem('access_token');
+                    setTimeout(() => {
+                        history.replace('/login');
+                    }, 500);
                     // 未授权
                     return {
                         meta: { code: 401, msg: '未登录或登录过期' }
@@ -46,7 +50,7 @@ class Base {
                 } else if (method === 'delete') {
                     response.response = {id};
                 }
-                resolve(response);
+                response.meta.code === 0 ? resolve(response) : reject(response);
             }).catch((error) => {
                 reject(error);
             });

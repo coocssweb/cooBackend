@@ -15,6 +15,8 @@ export default (state = initialState, action) => {
         // 获取当前用户信息
         case userActionTypes.FETCH_USERINFO_SUCCESS:
             return state.set('info', response).set('loading', false);
+        case userActionTypes.FETCH_USERINFO_ERROR:
+            return state.set('info', null).set('loading', false);
         // 登录
         case userActionTypes.LOGIN_SUCCESS:
             localStorage.setItem('access_token', response.access_token);
