@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import className from 'classnames';
-import { Button, Icon, Drawer, NoneData } from '@components';
+import { Button, Icon, Drawer, NoneData, Toast } from '@components';
 import ArticleForm from './form';
 import ArticleItem from './articleItem';
 
@@ -52,10 +52,12 @@ class Index extends Component {
 
     handleRemove (article, done) {
         this.props.remove(article.id, (result) => {
+            Toast.tip(result.meta.code > 0 ? result.meta.msg : '删除成功');
             if (result.meta.code !== 0) {
-                done();
+                done(result);
                 return false;
             }
+
             // 删除正在编辑的数据
             if (article.id === this.state.article.id) {
                 // 中间件最后一节会引起state变化
@@ -80,7 +82,7 @@ class Index extends Component {
 
     handleCreate (article, done) {
         this.props.create(article, (result) => {
-            done();
+            done(result);
             if (result.meta.code !== 0) {
                 return false;
             }
@@ -93,10 +95,7 @@ class Index extends Component {
 
     handleEdit (id, article, done) {
         this.props.edit(id, article, (result) => {
-            done();
-            if (result.meta.code === 0) {
-
-            }
+            done(result);
         });
     }
 

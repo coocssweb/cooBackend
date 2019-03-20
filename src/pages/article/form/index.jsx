@@ -61,7 +61,8 @@ class Index extends Component {
         }
     }
 
-    handleDone () {
+    handleDone (result) {
+        Toast.tip(result.meta.code > 0 ? result.meta.msg : '保存成功');
         setTimeout(() => {
             this.setState({
                 submitting: false

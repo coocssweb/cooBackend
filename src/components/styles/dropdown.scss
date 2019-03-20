@@ -7,7 +7,7 @@
     &-panel{
         position: fixed;
         background-color: $white;
-        box-shadow: 0 0 4px #d9d9d9;
+        //box-shadow: 0 0 4px #d9d9d9;
         border: 1px solid #dddddd;
         transform-origin: 0 0;
         animation-duration: .5s;
@@ -24,7 +24,7 @@
         width: 8px;
         border-top: 1px solid #dddddd;
         border-left: 1px solid #dddddd;
-        box-shadow: -2px -1px 4px #d9d9d9;
+        //box-shadow: -2px -1px 4px #d9d9d9;
         transform: rotate(45deg);
         left: 50%;
         top: 0%;

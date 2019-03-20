@@ -8,7 +8,7 @@ class Base {
         /* eslint-disable */
         this.requestUrl = `${API}${path}`;
     }
-    request ({ id = '', data = {}, method = 'GET', requireLogin }) {
+    request ({ id = '', pathAddon = '', data = {}, method = 'GET', requireLogin }) {
         const headers = {
             'Content-Type': 'application/json',
             'Authorization': `bearer ${localStorage.getItem('access_token')}`
@@ -28,8 +28,18 @@ class Base {
         const idAddons = id ? `/${id}` : '';
 
         return new Promise((resolve, reject) => {
-            fetch(`${this.requestUrl}${idAddons}`, settings).then((response) => {
-                return response.json();
+            fetch(`${this.requestUrl}${pathAddon}${idAddons}`, settings).then((response) => {
+                if (response.status >= 200 && response.status <= 304) {
+                    return response.json();
+                } else if (response.status === 401) {
+                    // 移除token
+                    // 路由跳转
+                    localStorage.removeItem('access_token');
+                    // 未授权
+                    return {
+                        meta: { code: 401, msg: '未登录或登录过期' }
+                    }
+                }
             }).then(response => {
                 if (method === 'put') {
                     response.response = data;

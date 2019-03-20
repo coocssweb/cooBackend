@@ -1,6 +1,3 @@
-/**
- * Created by coocss on 2019/1/7.
- */
 import React from 'react';
 import ReactDOM from 'react-dom';
 import Toast from './Toast';

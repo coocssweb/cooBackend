@@ -49,7 +49,7 @@ class Index extends Component {
     saveCallback (result) {
         this.setState({
             showAlert: true,
-            alertType: result.meta.code === 0 ? '' : 'danger',
+            alertType: result.meta.code === 0 ? 'primary' : 'danger',
             alertInfo: result.meta.code === 0 ? '标签信息编辑成功' : result.meta.msg,
             id: result.response.id,
             submitting: false
@@ -102,7 +102,7 @@ class Index extends Component {
 
         return (
             <React.Fragment>
-                { state.showAlert ? (<Alert onClose={() => { this.setState({ showAlert: false }) }}>{ state.alertInfo }</Alert>) : null }
+                { state.showAlert ? (<Alert type={state.alertType} onClose={() => { this.setState({ showAlert: false }) }}>{ state.alertInfo }</Alert>) : null }
                 <Form submitting={state.submitting} ref={ state.formRef } onSave={this.handleSave}>
                     <FormLine>
                         <FormItem label='名称'>

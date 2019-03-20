@@ -7,6 +7,9 @@
     &--primary{
         background-color:#c2e4e7;
         color: #484848;
+        .cooAlert-close{
+            color: $blue;
+        }
     }
     &--success{
         background-color: $green;
@@ -29,6 +32,6 @@
         right: 10px;
         top: 10px;
         text-decoration: none;
-        color: $blue;
+        color: $white;
     }
 }
