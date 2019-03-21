@@ -1,5 +1,5 @@
 import React from 'react';
-import { HashRouter as Router, Route, Switch } from 'react-router-dom';
+import { Router, Route, Switch } from 'react-router-dom';
 import history from './history';
 import Layout from '@containers/layout';
 import Login from '@containers/login';
@@ -9,7 +9,8 @@ export default function () {
     const Entry = () => {
         return (
             <Switch>
-                <Route path="/main" component={Layout}  />
+                <Route path="/main" component={Layout} />
+                <Route path="/" component={Login} />
                 <Route path="/login" component={Login} exact />
             </Switch>
         );

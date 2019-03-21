@@ -21,15 +21,19 @@ class Base {
             mode: 'cors'
         };
 
-        if (method !== 'GET') {
-            settings.body = JSON.stringify(data);
-        }
-
         // 设置id附加信息
         const idAddons = id ? `/${id}` : '';
+        let requestUrl = `${this.requestUrl}${pathAddon}${idAddons}`;
+
+        if (method !== 'GET') {
+            settings.body = JSON.stringify(data);
+        } else if (data) {
+            requestUrl = new URL(requestUrl);
+            Object.keys(data).forEach(key => requestUrl.searchParams.append(key, data[key]))
+        }
 
         return new Promise((resolve, reject) => {
-            fetch(`${this.requestUrl}${pathAddon}${idAddons}`, settings).then((response) => {
+            fetch(requestUrl, settings).then((response) => {
                 if (response.status >= 200 && response.status <= 304) {
                     return response.json();
                 } else if (response.status === 401) {

@@ -1,6 +1,7 @@
 .login{
     height: 100%;
-    background-image: url(https://www.bing.com/th?id=OHR.FallasBonfire_EN-CN7474702741_1920x1080.jpg&rf=NorthMale_1920x1080.jpg&pid=hp);
+    background-color: rgb(0, 128, 157);
+    background-image: url(https://auth.gfx.ms/16.000.28103.6/images/AppBackgrounds/28.jpg?x=65f7aacca6193a75765a132ca8e72690);
     background-size: cover;
     &-mask{
         position: absolute;
@@ -8,7 +9,7 @@
         bottom: 0px;
         right: 0px;
         left: 0px;
-        background-color: rgba(0, 0, 0, .6);
+        //background-color: rgba(0, 0, 0, .6);
     }
     &Form{
         background-color: rgba(255, 255, 255, 1);

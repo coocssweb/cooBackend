@@ -1,11 +1,11 @@
 import * as articlesActionTypes from '../constants/articles';
 import articlesApi from '@api/articles';
 
-export const fetch = () => {
+export const fetch = (classify) => {
     return {
         types: [articlesActionTypes.FETCH_ARTICLES_REQUEST, articlesActionTypes.FETCH_ARTICLES_SUCCESS, articlesActionTypes.FETCH_ARTICLES_ERROR],
         promise: () => {
-            return articlesApi.fetch();
+            return articlesApi.fetch(classify);
         }
     };
 };
@@ -37,5 +37,11 @@ export const remove = (id, callback) => {
             return articlesApi.remove(id);
         },
         callback
+    };
+};
+
+export const clear = () => {
+    return {
+        type: articlesActionTypes.CLEAR_ARTICLES
     };
 };

@@ -22,20 +22,27 @@ class Editor extends Component {
     }
 
     handleUpload (param) {
-        const serverURL = 'http://upload-server';
+        const props = this.props;
+        const serverURL = props.serverUrl;
         const xhr = new XMLHttpRequest;
         const fd = new FormData();
 
         const successFn = (response) => {
+            const result = JSON.parse(response.currentTarget.responseText);
+            const filename = result.response.filename;
+            const regWidth = /.+width_(\d+)_.+/;
+            const regHeight = /.+height_(\d+).+/;
+            const regExtName = /\.(\w+)$/;
+            const width = filename.match(regWidth)[1];
+            const height = filename.match(regHeight)[1];
+            const fileExt = filename.match(regExtName)[1];
             param.success({
-                url: xhr.responseText,
+                url: result.response.filename,
+                width: `${width}px`,
+                height: `${height}px`,
                 meta: {
-                    id: 'xxx',
-                    title: 'xxx',
-                    alt: 'xxx',
-                    src: 'xxx',
-                    width: 'xxx',
-                    height: 'xxx'
+                    src: filename,
+                    ['data-preview']: filename.replace(`.${fileExt}`, `_preview.${fileExt}`),
                 }
             })
         };
@@ -55,8 +62,11 @@ class Editor extends Component {
         xhr.addEventListener('error', errorFn, false);
         xhr.addEventListener('abort', errorFn, false);
 
-        fd.append('file', param.file);
+        fd.append('files', param.file);
         xhr.open('POST', serverURL, true);
+        if (props.token) {
+            xhr.setRequestHeader('Authorization', props.token);
+        }
         xhr.send(fd);
     }
 

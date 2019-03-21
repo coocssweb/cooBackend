@@ -128,9 +128,10 @@ class Index extends Component {
                                     value={state.type}
                                     onChange={this.handleSelectChange}
                                     validations={[Validation.required.bind(this, '请选择标签')]}>
-                                <Option value="article">分享</Option>
+                                <Option value="article">文章</Option>
                                 <Option value="photos">图集</Option>
-                                <Option value="music">音乐</Option>
+                                <Option value="musics">音乐</Option>
+                                <Option value="videos">视频</Option>
                             </Select>
                         </FormItem>
                     </FormLine>

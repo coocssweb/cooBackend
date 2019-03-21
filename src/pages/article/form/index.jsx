@@ -47,6 +47,7 @@ class Index extends Component {
             title: title,
             description,
             posters: state.posters,
+            classify: props.classify,
             content
         };
 
@@ -96,7 +97,9 @@ class Index extends Component {
                 <div className={className('articleForm-content')}>
                     <Editor height={height}
                             content={state.content}
-                            ref={ ref => {this.editorRef = ref} } />
+                            serverUrl={`${API}tool/upload`}
+                            ref={ ref => {this.editorRef = ref} }
+                            token={`bearer ${localStorage.getItem('access_token')}`} />
                 </div>
                 <div className={className('articleForm-photo')}>
                     <Uploader token={`bearer ${localStorage.getItem('access_token')}`}

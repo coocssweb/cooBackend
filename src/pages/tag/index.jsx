@@ -12,14 +12,7 @@ class Index extends Component {
 
         this.state = {
             visible: false,
-            list: [],
             tag: {},
-        };
-    }
-
-    static getDerivedStateFromProps (props, state) {
-        return {
-            list: props.list
         };
     }
 
@@ -74,12 +67,12 @@ class Index extends Component {
         const { state, props } = this;
 
         const renderList = () => {
-            return state.list.size === 0 ? (
-                <NoneData loading={props.loading} buttonName='去新建标签' onClick={this.handleCreateClick}>没有找到标签</NoneData>
+            return props.list.size === 0 ? (
+                <NoneData loading={props.loading} buttonName='去新建栏目' onClick={this.handleCreateClick}>没有找到标签</NoneData>
             ) : (
                 <div className={className('tagList')}>
                     {
-                        state.list.map(item => {
+                        props.list.map(item => {
                             return (
                                 <div key={item.id}
                                      className={className('tagItem')}
@@ -102,9 +95,9 @@ class Index extends Component {
         };
 
         const renderToolbar = () => {
-            return state.list.size > 0 ? (
+            return props.list.size > 0 ? (
                 <div className={className('tagToolbar')}>
-                    <Button size="large" onClick={this.handleCreateClick}>添加标签<Icon type="add" /></Button>
+                    <Button size="large" onClick={this.handleCreateClick}>添加栏目<Icon type="add" /></Button>
                 </div>
             ) : null;
         };
@@ -117,7 +110,7 @@ class Index extends Component {
                 {
                     renderToolbar()
                 }
-                <Drawer title="编辑标签信息"
+                <Drawer title="编辑栏目信息"
                         placement={state.placement}
                         visible={state.visible}
                         onClose={() => { this.setState({ visible: false }); }}

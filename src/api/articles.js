@@ -4,8 +4,8 @@ class Articles extends Base {
         super('articles');
     }
 
-    fetch (param) {
-        return this.request({});
+    fetch (classify) {
+        return this.request({ data: { classify } });
     }
 
     fetchOne (id) {

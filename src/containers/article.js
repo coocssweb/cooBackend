@@ -12,8 +12,8 @@ function mapStateToProps (state) {
 
 function mapDispatchToProps (dispatch) {
     return {
-        fetch: () => {
-            return dispatch(articleActions.fetch());
+        fetch: (classify) => {
+            return dispatch(articleActions.fetch(classify));
         },
         create: (data, callback) => {
             return dispatch(articleActions.create(data, callback));
@@ -23,6 +23,9 @@ function mapDispatchToProps (dispatch) {
         },
         remove: (id, callback) => {
             return dispatch(articleActions.remove(id, callback));
+        },
+        clear: () => {
+            return dispatch(articleActions.clear());
         }
     };
 }

@@ -4,6 +4,7 @@ import Immutable, { List } from 'immutable';
 const initialState = Immutable.fromJS({
     loading: true,
     error: false,
+    tag: null,
     list: []
 });
 
@@ -39,6 +40,10 @@ export default (state = initialState, action) => {
             return state
                 .set('submitting', false)
                 .update('list', (list) => list.delete(removeIndex));
+        // 清除列表信息
+        case articleActionTypes.CLEAR_ARTICLES:
+            return state.set('list', []).set('tag', null).set('loading', true);
+
         default:
             return state;
     }

@@ -13,18 +13,21 @@ class Index extends Component {
         this.handleRemove = this.handleRemove.bind(this);
         this.handleSelect = this.handleSelect.bind(this);
         this.state = {
-            list: [],
             article: null,
             prevArticle: null
         };
     }
 
     componentDidMount () {
-        if (this.props.list.size) {
-            return false;
-        }
+        this.props.fetch(this.props.classify);
+    }
 
-        this.props.fetch();
+    componentDidUpdate () {
+
+    }
+
+    componentWillUnmount () {
+        this.props.clear();
     }
 
     static getDerivedStateFromProps (props, state) {
@@ -39,7 +42,6 @@ class Index extends Component {
         }
 
         return {
-            list: props.list,
             article
         };
     }
@@ -60,13 +62,9 @@ class Index extends Component {
 
             // 删除正在编辑的数据
             if (article.id === this.state.article.id) {
-                // 中间件最后一节会引起state变化
-                // 所以，做setTimeout
-                setTimeout(() => {
-                    this.setState({
-                        article: null
-                    });
-                }, 0);
+                this.setState({
+                    article: null
+                });
             }
         });
     }
@@ -103,12 +101,12 @@ class Index extends Component {
         const { state, props} = this;
         const articleId = state.article ? state.article.id : null;
         const renderList = () => {
-            return state.list.size === 0 ? (
+            return props.list.size === 0 ? (
                 <NoneData loading={props.loading}>没有找到文件</NoneData>
             ) : (
                 <div className={className('articleList')}>
                     {
-                        state.list.map(item => <ArticleItem
+                        props.list.map(item => <ArticleItem
                             key={item.id} article={item}
                             selected={articleId === item.id}
                             onRemove={this.handleRemove}
@@ -123,7 +121,7 @@ class Index extends Component {
             <div className={className('page articlePage clearfix')}>
                 <div className={className('articleLeft')}>
                     <div className={className('articleToolbar')}>
-                        <Button onClick={this.handleNewClick}>添加分享<Icon type="add" /></Button>
+                        <Button onClick={this.handleNewClick}>添加{props.classifyName}<Icon type="add" /></Button>
                     </div>
                     <div className={className('articleList')}>
                         { renderList() }
@@ -133,10 +131,12 @@ class Index extends Component {
                     {
                         state.article ?
                             (
-                                <ArticleForm key={state.article.id}
-                                          article={state.article}
-                                          onCreate={this.handleCreate}
-                                          onEdit={this.handleEdit} />
+                                <ArticleForm
+                                    key={state.article.id}
+                                    classify={props.classify}
+                                    article={state.article}
+                                    onCreate={this.handleCreate}
+                                    onEdit={this.handleEdit} />
                             ) : null
                     }
                 </div>

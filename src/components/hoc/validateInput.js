@@ -7,7 +7,7 @@ import propTypes from 'prop-types';
 import classNames from 'classnames';
 
 export default (WrappedComponent) => {
-    class inputControl extends Component {
+    class InputControl extends Component {
         constructor (props) {
             super(props);
             this.onValidate = this.onValidate.bind(this);
@@ -78,14 +78,14 @@ export default (WrappedComponent) => {
         }
     }
 
-    inputControl.displayName = `ValidateInput(${WrappedComponent.displayName || WrappedComponent.name || 'Component'})`;
+    InputControl.displayName = `ValidateInput(${WrappedComponent.displayName || WrappedComponent.name || 'Component'})`;
 
-    inputControl.defaultProps = {
+    InputControl.defaultProps = {
         validations: []
     };
-    inputControl.propTypes = {
+    InputControl.propTypes = {
         validations: propTypes.array
     };
 
-    return inputControl;
+    return InputControl;
 };

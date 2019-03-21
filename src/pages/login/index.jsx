@@ -112,6 +112,8 @@ class Index extends Component {
                                         className={className('loginForm-input')}
                                         placeholder="请输入用户名"
                                         type="text"
+                                        aria-required="true"
+                                        autoComplete="true"
                                         ref={ ref => { this.nameRef = ref; } }
                                         onFocus={this.handleInputFocus} />
                                 </div>
@@ -120,6 +122,7 @@ class Index extends Component {
                                         className={className('loginForm-input')}
                                         placeholder="请输入密码"
                                         type="password"
+                                        aria-required="true"
                                         ref={ ref => { this.passwordRef = ref; } }
                                         onFocus={this.handleInputFocus} />
                                 </div>
