@@ -30,7 +30,7 @@ class Index extends Component {
         const { state, props} = this;
         const content = (this.editorRef.getContent() || '').trim();
         const title = this.inputRef.value.trim();
-        const description = content.replace(/<[^>]*>/ig, '').substring(0, 50);
+        const description = content.replace(/<[^>]*>/ig, '').substring(0, 80);
 
         if (title === '') {
             Toast.tip('请输入标题');

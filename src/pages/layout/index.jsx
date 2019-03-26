@@ -3,6 +3,7 @@ import className from 'classnames';
 import { Route, NavLink } from 'react-router-dom';
 import Tag from '@containers/tag';
 import Article from '@containers/article';
+import Project from '@containers/project';
 import User from '@containers/user';
 
 class Index extends Component {
@@ -33,31 +34,39 @@ class Index extends Component {
                                 to={`${match.url}/tags`}
                                 className={className('layout-menuLink')}
                                 activeClassName={className('layout-menuLink--active')}>
-                                <span className={className('layout-menuName')}>栏目</span>
+                                <span className={className('layout-menuName')}>标签</span>
                             </NavLink>
                         </li>
                         <li className={className('layout-menu')}>
                             <NavLink
-                                to={`${match.url}/articles/thinks`}
+                                to={`${match.url}/projects`}
                                 className={className('layout-menuLink')}
                                 activeClassName={className('layout-menuLink--active')}>
-                                <span className={className('layout-menuName')}>想法</span>
+                                <span className={className('layout-menuName')}>开源项目</span>
                             </NavLink>
                         </li>
                         <li className={className('layout-menu')}>
                             <NavLink
-                                to={`${match.url}/articles/photos`}
+                                to={`${match.url}/articles/frontend`}
                                 className={className('layout-menuLink')}
                                 activeClassName={className('layout-menuLink--active')}>
-                                <span className={className('layout-menuName')}>照片</span>
+                                <span className={className('layout-menuName')}>前端知识</span>
                             </NavLink>
                         </li>
                         <li className={className('layout-menu')}>
                             <NavLink
-                                to={`${match.url}/articles/musics`}
+                                to={`${match.url}/articles/works`}
                                 className={className('layout-menuLink')}
                                 activeClassName={className('layout-menuLink--active')}>
-                                <span className={className('layout-menuName')}>音乐</span>
+                                <span className={className('layout-menuName')}>项目总结</span>
+                            </NavLink>
+                        </li>
+                        <li className={className('layout-menu')}>
+                            <NavLink
+                                to={`${match.url}/articles/translates`}
+                                className={className('layout-menuLink')}
+                                activeClassName={className('layout-menuLink--active')}>
+                                <span className={className('layout-menuName')}>外文翻译</span>
                             </NavLink>
                         </li>
                         <li className={className('layout-menu')}>
@@ -65,17 +74,27 @@ class Index extends Component {
                                 to={`${match.url}/articles/shares`}
                                 className={className('layout-menuLink')}
                                 activeClassName={className('layout-menuLink--active')}>
-                                <span className={className('layout-menuName')}>转载</span>
+                                <span className={className('layout-menuName')}>精彩转载</span>
+                            </NavLink>
+                        </li>
+                        <li className={className('layout-menu')}>
+                            <NavLink
+                                to={`${match.url}/articles/reading`}
+                                className={className('layout-menuLink')}
+                                activeClassName={className('layout-menuLink--active')}>
+                                <span className={className('layout-menuName')}>关于读书</span>
                             </NavLink>
                         </li>
                     </ul>
                 </aside>
                 <div className={className('layout-main')}>
                     <Route path={`${match.path}/tags`} component={Tag} exact />
-                    <Route path={`${match.path}/articles/musics`} render={(props) => <Article {...props} classify="musics" classifyName="音乐" />} exact />
-                    <Route path={`${match.path}/articles/photos`} render={(props) => <Article {...props} classify="photos" classifyName="照片" />} exact />
-                    <Route path={`${match.path}/articles/shares`} render={(props) => <Article {...props} classify="shares" classifyName="转载" />} exact />
-                    <Route path={`${match.path}/articles/thinks`} render={(props) => <Article {...props} classify="thinks" classifyName="想法" />} exact />
+                    <Route path={`${match.path}/projects`} component={Project} exact />
+                    <Route path={`${match.path}/articles/frontend`} render={(props) => <Article {...props} classify="frontend" classifyName="前端知识" />} exact />
+                    <Route path={`${match.path}/articles/works`} render={(props) => <Article {...props} classify="works" classifyName="项目总结" />} exact />
+                    <Route path={`${match.path}/articles/translates`} render={(props) => <Article {...props} classify="translates" classifyName="外文翻译" />} exact />
+                    <Route path={`${match.path}/articles/shares`} render={(props) => <Article {...props} classify="shares" classifyName="精彩转载" />} exact />
+                    <Route path={`${match.path}/articles/reading`} render={(props) => <Article {...props} classify="books" classifyName="关于读书" />} exact />
                 </div>
             </div>
         );

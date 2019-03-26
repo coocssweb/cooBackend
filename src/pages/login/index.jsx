@@ -27,6 +27,7 @@ class Index extends Component {
     }
 
     componentDidMount () {
+        document.title = '登录';
         this.props.fetchInfo();
     }
 
