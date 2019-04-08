@@ -78,6 +78,7 @@ class Index extends Component {
     }
 
     handleUploaderChange (images) {
+        console.log(images);
         this.setState({
             posters: images
         });
@@ -85,7 +86,8 @@ class Index extends Component {
 
     render () {
         const state = this.state;
-        const { height, placement } = state;
+        const { height } = state;
+
         return (
             <div className={className('articleForm')}>
                 <div className={className('articleForm-title')}>

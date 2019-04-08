@@ -147,7 +147,6 @@ class Index extends Component {
                     <FormLine>
                         <FormItem label='封面'>
                             <Uploader token={`bearer ${localStorage.getItem('access_token')}`}
-                                      validations={[Validation.required.bind(this, '请上传封面图')]}
                                       max={1}
                                       images={state.images}
                                       serverUrl={`${API}tool/upload`}

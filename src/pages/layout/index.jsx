@@ -4,6 +4,7 @@ import { Route, NavLink } from 'react-router-dom';
 import Tag from '@containers/tag';
 import Article from '@containers/article';
 import Project from '@containers/project';
+import Demo from '@containers/demo';
 import User from '@containers/user';
 
 class Index extends Component {
@@ -43,6 +44,14 @@ class Index extends Component {
                                 className={className('layout-menuLink')}
                                 activeClassName={className('layout-menuLink--active')}>
                                 <span className={className('layout-menuName')}>开源项目</span>
+                            </NavLink>
+                        </li>
+                        <li className={className('layout-menu')}>
+                            <NavLink
+                                to={`${match.url}/demos`}
+                                className={className('layout-menuLink')}
+                                activeClassName={className('layout-menuLink--active')}>
+                                <span className={className('layout-menuName')}>实验室</span>
                             </NavLink>
                         </li>
                         <li className={className('layout-menu')}>
@@ -90,6 +99,7 @@ class Index extends Component {
                 <div className={className('layout-main')}>
                     <Route path={`${match.path}/tags`} component={Tag} exact />
                     <Route path={`${match.path}/projects`} component={Project} exact />
+                    <Route path={`${match.path}/demos`} component={Demo} exact />
                     <Route path={`${match.path}/articles/frontend`} render={(props) => <Article {...props} classify="frontend" classifyName="前端知识" />} exact />
                     <Route path={`${match.path}/articles/works`} render={(props) => <Article {...props} classify="works" classifyName="项目总结" />} exact />
                     <Route path={`${match.path}/articles/translates`} render={(props) => <Article {...props} classify="translates" classifyName="外文翻译" />} exact />

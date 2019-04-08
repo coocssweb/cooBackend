@@ -102,6 +102,7 @@ class Uploader extends Component {
         this.setState({
             value: images
         });
+        this.props.onChange(images);
     }
 
     render () {

@@ -30,19 +30,10 @@ class Editor extends Component {
         const successFn = (response) => {
             const result = JSON.parse(response.currentTarget.responseText);
             const filename = result.response.filename;
-            const regWidth = /.+width_(\d+)_.+/;
-            const regHeight = /.+height_(\d+).+/;
-            const regExtName = /\.(\w+)$/;
-            const width = filename.match(regWidth)[1];
-            const height = filename.match(regHeight)[1];
-            const fileExt = filename.match(regExtName)[1];
             param.success({
                 url: result.response.filename,
-                width: `${width}px`,
-                height: `${height}px`,
                 meta: {
-                    src: filename,
-                    ['data-preview']: filename.replace(`.${fileExt}`, `_preview.${fileExt}`),
+                    src: filename
                 }
             })
         };

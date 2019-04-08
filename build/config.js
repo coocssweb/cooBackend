@@ -25,7 +25,7 @@ module.exports = {
     // 开发环境
     development: {
         env: 'development',                     // 环境
-        api: 'http://localhost:4322/api/',      // api 接口地址
+        api: 'http://www.shuxia123.com/api/',      // api 接口地址
         publicPath: '',                         // 静态资源地址
         imagePath: '',                          // 图片资源地址
         port: '8088',                           // 开发端口
