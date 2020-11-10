@@ -1,63 +1,66 @@
-.tag{
-    &Page{
-        padding: 10px;
+.tag {
+  &Page {
+    padding: 10px;
+  }
+  &List {
+    display: flex;
+    flex-wrap: wrap;
+  }
+  &Item {
+    width: 200px;
+    height: 200px;
+    background-size: cover;
+    margin-right: 10px;
+    margin-bottom: 10px;
+    display: table;
+    position: relative;
+    &:hover {
+      .tagItem-remove {
+        display: block;
+      }
     }
-    &List{
-        display: flex;
-        flex-wrap: wrap;
+    &-remove {
+      position: absolute;
+      right: 5px;
+      top: 5px;
+      text-decoration: none;
+      color: #ffffff;
+      font-size: 25px;
+      display: none;
+      &:hover {
+        opacity: 0.8;
+      }
     }
-    &Item{
-        width: 200px;
-        height: 200px;
-        background-size: cover;
-        margin-right: 10px;
-        margin-bottom: 10px;
-        display: table;
-        position: relative;
-        &:hover{
-            .tagItem-remove{
-                display: block;
-            }
-        }
-        &-remove{
-            position: absolute;
-            right: 5px;
-            top: 5px;
-            text-decoration: none;
-            color: #ffffff;
-            font-size: 25px;
-            display: none;
-            &:hover{
-                opacity: .8;
-            }
-        }
-        &-cell{
-            display: table-cell;
-            vertical-align: middle;
-            text-align: center;
-            background-color: rgba(0, 0, 0, .3);
-        }
-        &-name{
-            font-size: 20px;
-            color: $colorWhite;
-        }
-        &-desc{
-            color: $colorWhite;
-            margin: 10px 0px;
-        }
+    &-cell {
+      display: table-cell;
+      vertical-align: middle;
+      text-align: center;
+      background-color: rgba(0, 0, 0, 0.3);
     }
-    &Toolbar{
-        padding: 10px 0px 20px 0px;
+    &-name {
+      font-size: 20px;
+      color: $colorWhite;
     }
+    &-desc {
+      color: $colorWhite;
+      margin: 10px 10px;
+      height: 30px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+  }
+  &Toolbar {
+    padding: 10px 0px 20px 0px;
+  }
 
-    &Remove{
-        position: absolute !important;
-        bottom: 0px;
-        width: 100%;
-        text-align: center;
-        display: none !important;
-        &--show{
-            display: block !important;
-        }
+  &Remove {
+    position: absolute !important;
+    bottom: 0px;
+    width: 100%;
+    text-align: center;
+    display: none !important;
+    &--show {
+      display: block !important;
     }
+  }
 }
