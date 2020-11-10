@@ -73,7 +73,7 @@ class Index extends Component {
         return false;
       }
       setTimeout(() => {
-        this.props.history.replace("/main/tags");
+        this.props.history.replace("/main/medias");
       }, 0);
     });
   }
