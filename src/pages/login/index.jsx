@@ -92,7 +92,7 @@ class Index extends Component {
 
           {state.info ? (
             <React.Fragment>
-              <Link to="/main/tags" className={className("loginInfo")}>
+              <Link to="/main/bestwishs" className={className("loginInfo")}>
                 <img
                   src={state.info.avatar}
                   className={className("loginInfo-avatar")}
