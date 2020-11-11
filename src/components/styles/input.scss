@@ -1,95 +1,98 @@
-.cooInput{
-    &-wrapper {
-        position: relative;
-        display: inline-block;
-    }
-    display: inline-block;
-    outline: 0;
+.cooInput {
+  &-wrapper {
     position: relative;
-    background-image: none;
-    background-color: transparent;
-    font-smoothing: antialiased;
-    border: 1px solid $borderInputColor;
-    color: $colorGrayDark;
-    box-sizing: border-box;
-    width: 100%;
-    &:focus{
-        border-color: $borderInputFocusColor;
-    }
+    display: inline-block;
+  }
+  display: inline-block;
+  outline: 0;
+  position: relative;
+  background-image: none;
+  background-color: transparent;
+  font-smoothing: antialiased;
+  border: 1px solid $borderInputColor;
+  color: $colorGrayDark;
+  box-sizing: border-box;
+  width: 100%;
+  &:focus {
+    border-color: $borderInputFocusColor;
+  }
 
-    &--default{
-        padding: 6px 10px;
-        line-height: 22px;
-        border-width: 1px;
-        border-style: solid;
-        font-size: 14px;
-        border-radius: $borderRadius;
-        width: 250px;
-    }
+  &--default {
+    padding: 6px 10px;
+    line-height: 22px;
+    border-width: 1px;
+    border-style: solid;
+    font-size: 14px;
+    border-radius: $borderRadius;
+    width: 250px;
+  }
 
-    &--large{
-        padding: 10px 10px;
-        font-size: 14px;
-        line-height: 24px;
-        width: 320px;
-        border-radius: $borderRadiusLarge;
+  &--large {
+    padding: 10px 10px;
+    font-size: 14px;
+    line-height: 24px;
+    width: 320px;
+    border-radius: $borderRadiusLarge;
+  }
+  &--readonly {
+    background-image: linear-gradient(0deg, #f8f8f8, #efefef);
+    border-color: $normalBorderColor;
+    background-color: $white;
+    color: #999;
+    cursor: not-allowed;
+    &:focus {
+      border-color: $normalBorderColor;
     }
-    &--readonly{
-        background-image: linear-gradient(0deg, #f8f8f8, #efefef);
-        border-color: $normalBorderColor;
-        background-color: $white;
-        color: #999;
-        cursor: not-allowed;
-        &:focus{
-            border-color: $normalBorderColor;
-        }
-    }
-    &--error{
-        background-color: $errorColor;
-        border-color: $errorBorderColor;
-    }
+  }
+  &--error {
+    background-color: $errorColor;
+    border-color: $errorBorderColor;
+  }
 }
 
-.cooTextArea{
-    display: inline-block;
-    outline: 0;
+.cooTextArea {
+  display: inline-block;
+  outline: 0;
+  position: relative;
+  background-image: none;
+  background-color: transparent;
+  font-smoothing: antialiased;
+  border: 1px solid $borderInputColor;
+  color: $colorGrayDark;
+  resize: none;
+  box-sizing: border-box;
+  &:focus {
+    border-color: $borderInputFocusColor;
+  }
+
+  &--default {
+    padding: 6px 10px;
+    line-height: 22px;
+    border-width: 1px;
+    border-style: solid;
+    font-size: 14px;
+    border-radius: $borderRadius;
+    width: 250px;
+  }
+
+  &--large {
+    padding: 10px 10px;
+    font-size: 14px;
+    line-height: 24px;
+    width: 320px;
+    border-radius: $borderRadiusLarge;
+  }
+
+  &-wrapper {
     position: relative;
-    background-image: none;
-    background-color: transparent;
-    font-smoothing: antialiased;
-    border: 1px solid $borderInputColor;
-    color: $colorGrayDark;
-    resize: none;
-    box-sizing: border-box;
-    &:focus{
-        border-color: $borderInputFocusColor;
-    }
+    display: inline-block;
+  }
 
-    &--default{
-        padding: 6px 10px;
-        line-height: 22px;
-        border-width: 1px;
-        border-style: solid;
-        font-size: 14px;
-        border-radius: $borderRadius;
-        width: 250px;
-    }
-
-    &--large{
-        padding: 10px 10px;
-        font-size: 14px;
-        line-height: 24px;
-        width: 320px;
-        border-radius: $borderRadiusLarge;
-    }
-
-    &-wrapper {
-        position: relative;
-        display: inline-block;
-    }
-
-    &--error{
-        background-color: $errorColor;
-        border-color: $errorBorderColor;
-    }
+  &--error {
+    background-color: $errorColor;
+    border-color: $errorBorderColor;
+  }
+  &--readonly {
+    background-color: #f5f5f5;
+  }
 }

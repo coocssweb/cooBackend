@@ -139,8 +139,7 @@ class Index extends Component {
                     <Input.TextArea
                       readonly
                       size="large"
-                      value={`<script type="text/javascript"  src="https://www.shuxia123.com/bestwish/clipboard.min.js"></script>
-<script type="text/javascript"src="https://www.shuxia123.com/services/bestwish/cnzz/${state.code}"></script>`}
+                      value={`<script type="text/javascript"src="https://www.shuxia123.com/services/bestwish/cnzz/${state.code}"></script>`}
                     />
                   </code>
                 </pre>

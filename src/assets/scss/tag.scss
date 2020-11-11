@@ -35,7 +35,10 @@
       display: table-cell;
       vertical-align: middle;
       text-align: center;
-      background-color: rgba(0, 0, 0, 0.3);
+      background-color: #007076;
+      &--disabled {
+        background-color: rgba(0, 0, 0, 0.2);
+      }
     }
     &-name {
       font-size: 20px;

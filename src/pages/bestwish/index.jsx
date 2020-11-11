@@ -89,7 +89,7 @@ class Index extends Component {
           {props.list.map((item) => {
             const media = this.props.mediaMap[item.mediaId] || {};
             return (
-              <div key={item.id} className={className("tagItem")}>
+              <div key={item.id} className={className({ "tagItem": true })}>
                 <a
                   href="javascript:;"
                   className={className("tagItem-remove")}
@@ -97,7 +97,7 @@ class Index extends Component {
                 >
                   <Icon type="delete" />
                 </a>
-                <div className="tagItem-cell">
+                <div className="tagItem-cell" className={className({ "tagItem-cell": true, "tagItem-cell--disabled": item.enable !== 1})}>
                   <div className={className("tagItem-name")}>{media.name}</div>
                   <p className={className("tagItem-desc")}>
                     {item.description}
